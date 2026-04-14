@@ -1,0 +1,256 @@
+/* ─── Space Canvas Background ─────────────────────────── */
+#space-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: -1; /* Behind all page content */
+  pointer-events: none;
+  display: block;
+}
+
+/* ─── Scroll Progress Bar ─────────────────────────────── */
+#scroll-progress {
+  position: fixed;
+  top: 0; left: 0;
+  width: 0%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-mid));
+  box-shadow: 0 0 8px var(--accent-glow);
+  z-index: 9999;
+  transition: width 0.1s linear;
+}
+
+/* ─── Grain Overlay ───────────────────────────────────── */
+#grain {
+  position: fixed;
+  inset: -50%;
+  width: 200%; height: 200%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  opacity: 0.018;
+  pointer-events: none;
+  z-index: 9998;
+  animation: grain 0.5s steps(1) infinite;
+}
+
+@keyframes grain {
+  0%,100% { transform:translate(0,0); }
+  10%  { transform:translate(-2%,-3%); }
+  20%  { transform:translate(3%,2%); }
+  30%  { transform:translate(-1%,4%); }
+  40%  { transform:translate(4%,-1%); }
+  50%  { transform:translate(-3%,3%); }
+  60%  { transform:translate(2%,-4%); }
+  70%  { transform:translate(-4%,1%); }
+  80%  { transform:translate(1%,-2%); }
+  90%  { transform:translate(-2%,4%); }
+}
+
+/* ─── Container ───────────────────────────────────────── */
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+/* ─── Navigation ──────────────────────────────────────── */
+#nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 22px var(--container-padding);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all var(--t-base);
+}
+
+#nav.scrolled {
+  background: rgba(3, 3, 8, 0.82);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(124, 111, 255, 0.1);
+  padding: 14px var(--container-padding);
+}
+
+/* Clean wordmark logo */
+.nav-logo {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  background: linear-gradient(135deg, var(--text) 20%, var(--accent-mid) 110%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  transition: opacity var(--t-fast);
+}
+
+.nav-logo:hover { opacity: 0.8; }
+
+/* Nav links */
+.nav-links {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.nav-links a {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-2);
+  letter-spacing: 0.01em;
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  transition: all var(--t-fast);
+}
+
+.nav-links a:hover {
+  color: var(--text);
+  background: rgba(124, 111, 255, 0.1);
+  border-color: rgba(124, 111, 255, 0.2);
+}
+
+/* Status badge */
+.nav-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--green);
+  border: 1px solid var(--green-border);
+  background: rgba(52, 211, 153, 0.08);
+  padding: 5px 12px;
+  border-radius: var(--radius-sm);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: all var(--t-base);
+}
+
+.nav-badge:hover { background: rgba(52, 211, 153, 0.15); }
+
+.pulse-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  flex-shrink: 0;
+  animation: pulse-ring 2.5s ease infinite;
+  position: relative;
+}
+
+.pulse-dot::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 1px solid var(--green);
+  animation: pulse-expand 2.5s ease infinite;
+}
+
+@keyframes pulse-ring  { 0%,100%{opacity:1} 50%{opacity:0.4} }
+@keyframes pulse-expand { 0%{transform:scale(1);opacity:0.7} 100%{transform:scale(2.5);opacity:0} }
+
+/* Mobile nav hamburger */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  padding: 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.nav-hamburger span {
+  width: 20px; height: 1px;
+  background: var(--text);
+  transition: all var(--t-base);
+}
+
+/* ─── Sections — transparent to show space bg ─────────── */
+section {
+  padding: var(--section-padding) 0;
+  background: transparent;
+}
+
+/* ─── Section Labels ──────────────────────────────────── */
+.section-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--text-2);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+}
+
+.section-label .label-prompt { color: var(--green); }
+.section-label .label-cmd    { color: var(--accent-mid); }
+.section-label .label-arg    { color: var(--amber); }
+
+.section-title {
+  font-size: clamp(28px, 4.5vw, 52px);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  margin-bottom: 18px;
+}
+
+.section-subtitle {
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--text-2);
+  max-width: 520px;
+  line-height: 1.75;
+}
+
+/* ─── Keyboard hint ───────────────────────────────────── */
+#keyboard-hint {
+  position: fixed;
+  bottom: 24px; right: 24px;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  color: var(--text-muted);
+  transition: opacity var(--t-slow);
+  letter-spacing: 0.06em;
+}
+
+#keyboard-hint .key {
+  border: 1px solid var(--text-muted);
+  border-radius: 3px;
+  padding: 1px 5px;
+  font-size: 9px;
+  line-height: 1.6;
+}
+
+/* ─── Responsive ──────────────────────────────────────── */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(3, 3, 8, 0.97);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 28px;
+    z-index: 99;
+  }
+
+  .nav-links.open { display: flex; }
+  .nav-links a { font-size: 20px; padding: 10px 24px; }
+  .nav-hamburger { display: flex; z-index: 101; }
+  .nav-badge { display: none; }
+  #keyboard-hint { display: none; }
+}
