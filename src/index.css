@@ -57,3 +57,13 @@ body {
   .hidden-mobile { display: none !important; }
   .show-mobile { display: block !important; }
 }
+
+/* ─── Hero Section — Mobile Responsive ─── */
+@media (max-width: 768px) {
+  /* Hide the stat block on small screens */
+  .hero-stats { display: none !important; }
+  /* Collapse to single column on mobile */
+  section#hero > div > div[style*="grid"] {
+    grid-template-columns: 1fr !important;
+  }
+}
