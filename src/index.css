@@ -51,3 +51,9 @@ body {
   z-index: 100;
   transition: width 0.1s linear;
 }
+
+/* ─── Responsive Nav Helpers ─── */
+@media (max-width: 768px) {
+  .hidden-mobile { display: none !important; }
+  .show-mobile { display: block !important; }
+}
