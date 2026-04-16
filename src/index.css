@@ -1,29 +1,32 @@
 @import "tailwindcss";
-@import "tw-animate-css";
 
-/* ─── Portfolio Design Tokens (Tailwind v4 @theme) ─── */
 @theme {
-  /* Brand colors */
-  --color-background: #F9F8F6;
-  --color-surface: #F0EFEB;
-  --color-border: #E5E4DF;
-  --color-primary: #121212;
-  --color-secondary: #6B6B6B;
-  --color-accent: #1E3A5F;
-  --color-accent-light: #2A527F;
+  /* Fortune/Bloomberg editorial palette */
+  --color-paper: #FDFCF8;
+  --color-ink: #0F0F0E;
+  --color-gold: #C9A84C;
+  --color-gold-dark: #A88A2E;
+  --color-surface: #F5F2EA;
+  --color-border: #E2DCCF;
+  --color-muted: #7A7060;
+  --color-cover: #0F0F0E;
 
-  /* Fonts — loaded from Google Fonts in index.html */
+  /* Compatibility aliases used by existing components */
+  --color-background: #FDFCF8;
+  --color-primary: #0F0F0E;
+  --color-secondary: #7A7060;
+  --color-accent: #C9A84C;
+  --color-accent-light: #A88A2E;
+
+  /* Fonts */
   --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-body: "Lora", Georgia, serif;
   --font-sans: "DM Sans", system-ui, sans-serif;
 
-  /* Max container width */
   --max-width-container: 1100px;
 }
 
-/* ─── Global Reset & Base Styles ─── */
-*,
-*::before,
-*::after {
+* {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -34,36 +37,58 @@ html {
 }
 
 body {
-  background-color: #F9F8F6;
-  color: #121212;
-  font-family: "DM Sans", system-ui, sans-serif;
+  background-color: #FDFCF8;
+  color: #0F0F0E;
+  font-family: 'Lora', Georgia, serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* ─── Scroll Progress Bar ─── */
+/* Scroll progress bar — gold */
 #scroll-progress {
   position: fixed;
   top: 0;
   left: 0;
   height: 2px;
-  background-color: #1E3A5F;
+  background-color: #C9A84C;
   z-index: 100;
   transition: width 0.1s linear;
 }
 
-/* ─── Responsive Nav Helpers ─── */
+/* Chapter scroll snap container */
+.chapters-container {
+  height: 100vh;
+  overflow-y: scroll;
+  scroll-snap-type: y proximity;
+  scroll-behavior: smooth;
+}
+
+.chapter-section {
+  scroll-snap-align: start;
+  min-height: 100vh;
+}
+
+/* Grain overlay */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0.018;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+
+/* Mobile responsive */
 @media (max-width: 768px) {
   .hidden-mobile { display: none !important; }
   .show-mobile { display: block !important; }
 }
 
-/* ─── Hero Section — Mobile Responsive ─── */
-@media (max-width: 768px) {
-  /* Hide the stat block on small screens */
-  .hero-stats { display: none !important; }
-  /* Collapse to single column on mobile */
-  section#hero > div > div[style*="grid"] {
-    grid-template-columns: 1fr !important;
-  }
+/* Print styles for CV chapter */
+@media print {
+  .no-print { display: none !important; }
+  body::after { display: none; }
+  #scroll-progress { display: none; }
 }
