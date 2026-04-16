@@ -1,23 +1,36 @@
+import { useState } from 'react'
+import BookCover from '../components/sections/BookCover'
+
 export default function Home() {
+  const [bookOpen, setBookOpen] = useState(false)
+
   return (
-    <div style={{
-      minHeight: '100vh',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      backgroundColor: '#FDFCF8',
-      fontFamily: '"Cormorant Garamond", Georgia, serif',
-    }}>
-      <div style={{ textAlign: 'center' }}>
-        <h1 style={{ fontSize: '6rem', fontWeight: 600, color: '#C9A84C', letterSpacing: '0.06em' }}>
-          AAMIR ALI
-        </h1>
-        <p style={{ fontFamily: '"Lora", Georgia, serif', fontStyle: 'italic', color: '#7A7060', marginTop: '16px' }}>
-          Not a resume. A record.
-        </p>
-        <p style={{ fontFamily: '"DM Sans", system-ui, sans-serif', fontSize: '0.75rem', color: '#7A7060', marginTop: '32px', letterSpacing: '0.1em' }}>
-          Building in progress...
-        </p>
+    <div style={{ backgroundColor: '#FDFCF8', minHeight: '100vh' }}>
+      <BookCover onOpen={() => setBookOpen(true)} />
+
+      {/* Content revealed after cover opens */}
+      <div
+        style={{
+          opacity: bookOpen ? 1 : 0,
+          transform: bookOpen ? 'none' : 'translateY(16px)',
+          transition: 'opacity 0.7s ease 0.2s, transform 0.7s ease 0.2s',
+          pointerEvents: bookOpen ? 'auto' : 'none',
+          minHeight: '100vh',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontFamily: '"Cormorant Garamond", Georgia, serif',
+          color: '#C9A84C',
+        }}
+      >
+        <div style={{ textAlign: 'center' }}>
+          <div style={{ fontSize: '0.7rem', fontFamily: '"DM Sans", system-ui, sans-serif', letterSpacing: '0.18em', textTransform: 'uppercase', color: '#7A7060', marginBottom: '16px' }}>
+            In This Issue
+          </div>
+          <h2 style={{ fontSize: '3rem', fontWeight: 600 }}>
+            Chapter Nav — Coming Next
+          </h2>
+        </div>
       </div>
     </div>
   )
