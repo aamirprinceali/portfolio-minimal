@@ -17,6 +17,7 @@ export default function Reveal({
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-60px' })
 
+  const revealEasing: [number, number, number, number] = [0.22, 1, 0.36, 1]
   const variants = {
     hidden: {
       opacity: 0,
@@ -30,7 +31,7 @@ export default function Reveal({
       transition: {
         duration: 0.6,
         delay,
-        ease: [0.22, 1, 0.36, 1],
+        ease: revealEasing,
       },
     },
   }

@@ -1,6 +1,11 @@
 import { useState } from 'react'
 import BookCover from '../components/sections/BookCover'
 import ChapterNav from '../components/sections/ChapterNav'
+import ChapterBackground from '../components/sections/ChapterBackground'
+import ChapterToolkit from '../components/sections/ChapterToolkit'
+import ChapterWork from '../components/sections/ChapterWork'
+import ChapterRecord from '../components/sections/ChapterRecord'
+import ChapterWorkWithMe from '../components/sections/ChapterWorkWithMe'
 
 export default function Home() {
   const [bookOpen, setBookOpen] = useState(false)
@@ -9,7 +14,6 @@ export default function Home() {
     <div style={{ backgroundColor: '#FDFCF8' }}>
       <BookCover onOpen={() => setBookOpen(true)} />
 
-      {/* All chapters — revealed after cover opens */}
       <div
         style={{
           opacity: bookOpen ? 1 : 0,
@@ -19,7 +23,11 @@ export default function Home() {
         }}
       >
         <ChapterNav />
-        {/* Chapter 01–05 added in subsequent tasks */}
+        <ChapterBackground />
+        <ChapterToolkit />
+        <ChapterWork />
+        <ChapterRecord />
+        <ChapterWorkWithMe />
       </div>
     </div>
   )

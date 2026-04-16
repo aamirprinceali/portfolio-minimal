@@ -7,12 +7,13 @@ const container = {
   visible: { transition: { staggerChildren: 0.12 } },
 }
 
+const heroEasing: [number, number, number, number] = [0.22, 1, 0.36, 1]
 // Each child fades in and rises from 32px below
 const item = {
   hidden: { opacity: 0, y: 32 },
   visible: {
     opacity: 1, y: 0,
-    transition: { duration: 0.75, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.75, ease: heroEasing },
   },
 }
 

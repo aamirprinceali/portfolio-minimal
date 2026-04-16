@@ -51,13 +51,14 @@ export default function BookCover({ onOpen }: BookCoverProps) {
   }, [triggerOpen])
 
   // Panel slide animation — easing feels like physical momentum
+  const panelEase: [number, number, number, number] = [0.76, 0, 0.24, 1]
   const panelVariants = {
     closed: { x: '0%' },
     open: (dir: number) => ({
       x: `${dir * 105}%`,
       transition: {
         duration: 1.25,
-        ease: [0.76, 0, 0.24, 1],
+        ease: panelEase,
       },
     }),
   }
@@ -65,7 +66,7 @@ export default function BookCover({ onOpen }: BookCoverProps) {
   // Cover content fades out as panels slide
   const contentVariants = {
     visible: { opacity: 1 },
-    hidden: { opacity: 0, transition: { duration: 0.35, ease: 'easeIn' } },
+    hidden: { opacity: 0, transition: { duration: 0.35, ease: 'easeIn' as const } },
   }
 
   if (isDone) return null
