@@ -2,37 +2,47 @@
 
 Last session: 2026-04-16
 
-## Where We Left Off
-Design direction finalized and approved. Starting the build of the new magazine/book concept.
+## Status: COMPLETE — ready for review
 
-## What Was Completed This Session
-1. React + Vite + TypeScript scaffolded
-2. Tailwind v4 design tokens configured
-3. Core layout: Navbar, Footer, ScrollProgress, CustomCursor
-4. Shared utilities: Reveal (Framer Motion scroll reveal), SectionHeader
-5. Hero section built (old design — will be replaced by BookCover)
-6. Full plan written at docs/plans/
-7. Design pivoted from minimalist professional → Fortune/Bloomberg editorial book
-8. Tagline approved: "Not a resume. A record."
+## What Was Built This Session
+The full Fortune/Bloomberg editorial magazine/book portfolio is complete.
 
-## What Needs to Happen Next Session
-1. Build BookCover component (cinematic split-open animation)
-2. Build ChapterNav (In This Issue table of contents)
-3. Build all 5 chapters with page-fold transitions
-4. Remove old Hero component (replaced by BookCover)
-5. Test full scroll experience
-6. Push to GitHub
-7. Share URL with Aamir to link from space portfolio
+### All components built:
+- BookCover.tsx — cinematic hardcover split-open animation (black cover, gold name, two panels slide apart)
+- ChapterNav.tsx — "In This Issue" table of contents page
+- ChapterSection.tsx — reusable page-fold reveal wrapper (Framer Motion rotateX)
+- ChapterHeader.tsx — editorial chapter number + ruled line + display headline + italic deck
+- ChapterBackground.tsx — Chapter 01: two-column bio, pull quote, skills sidebar, highlight cards
+- ChapterToolkit.tsx — Chapter 02: 8 tool cards in editorial grid
+- ChapterWork.tsx — Chapter 03: 6 project cards with gold hover accent
+- ChapterRecord.tsx — Chapter 04: full CV (timeline, experience, skills, education, print button)
+- ChapterWorkWithMe.tsx — Chapter 05: 9 services, 4-step process, Web3Forms contact form
 
-## Files to Know
-- src/components/sections/Hero.tsx — OLD, will be deleted/replaced
-- src/index.css — design tokens live here (@theme block)
-- docs/plans/2026-04-13-portfolio-react-rebuild.md — full original plan
-- docs/plans/2026-04-16-magazine-book-redesign.md — new plan (being created)
+### Architecture:
+- Single page (/) — no routing for content
+- Book cover opens → ChapterNav → 5 chapters scroll as one page
+- Build passes: npm run build ✅ (418kb JS, 30kb CSS, zero errors)
+- Pushed to GitHub: main branch ✅
 
-## Run the Project
+## To view the site
 ```bash
 cd ~/Desktop/dev/portfolio-minimal
 npm run dev
-# Opens at http://localhost:5173
+# Open http://localhost:5173
+# Scroll or click to open the book
 ```
+
+## What's Left (future sessions)
+1. Visual QA — review design, animations, typography on localhost
+2. Mobile responsive polish (highlight cards 2x2 should go 1x1 on mobile, etc.)
+3. Vercel deployment
+4. Get production URL → share with Aamir to link from space portfolio as "Professional" choice
+5. Optional: Navbar chapter-aware highlighting (shows which chapter is currently visible)
+
+## Key facts for next session
+- Tagline: "Not a resume. A record."
+- Role title: "Operations & Customer Success Professional"
+- Web3Forms key: 61182368-6cdc-4631-9ac8-be2a5293d520
+- GitHub: https://github.com/aamirprinceali/portfolio-minimal
+- This site will be linked FROM portfolio-site (space portfolio) as "Professional" option
+- Design plan: docs/plans/2026-04-16-magazine-book-redesign.md
