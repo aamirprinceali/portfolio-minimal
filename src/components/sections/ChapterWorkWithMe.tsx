@@ -88,9 +88,9 @@ export default function ChapterWorkWithMe() {
     width: '100%',
     fontFamily: '"Lora", Georgia, serif',
     fontSize: '0.9rem',
-    color: '#0F0F0E',
-    backgroundColor: '#FDFCF8',
-    border: '1px solid #E2DCCF',
+    color: '#F5F0E8',
+    backgroundColor: 'rgba(255,255,255,0.06)',
+    border: '1px solid rgba(201,168,76,0.2)',
     borderRadius: '4px',
     padding: '12px 16px',
     outline: 'none',
@@ -105,18 +105,19 @@ export default function ChapterWorkWithMe() {
     fontWeight: 600,
     letterSpacing: '0.1em',
     textTransform: 'uppercase',
-    color: '#7A7060',
+    color: 'rgba(245,240,232,0.55)',
     marginBottom: '8px',
   }
 
   return (
-    <ChapterSection id="chapter-work-with-me" backgroundColor="#F5F2EA">
+    <ChapterSection id="chapter-work-with-me" backgroundColor="#0F0F0E">
       <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '96px 24px 80px' }}>
         <ChapterHeader
           number="05"
           chapter="Work With Me"
           headline="Let's build<br/>something useful."
           deck="I take on a small number of freelance projects — automation, ops consulting, website builds, and AI integration."
+          dark={true}
         />
 
         {/* Services grid */}
@@ -133,7 +134,7 @@ export default function ChapterWorkWithMe() {
             fontWeight: 600,
             letterSpacing: '0.2em',
             textTransform: 'uppercase',
-            color: '#7A7060',
+            color: 'rgba(245,240,232,0.4)',
             marginBottom: '24px',
           }}>
             What I Do
@@ -148,25 +149,25 @@ export default function ChapterWorkWithMe() {
               <motion.div
                 key={title}
                 variants={item}
+                className="gold-glow-dark"
                 style={{
-                  backgroundColor: '#FDFCF8',
-                  border: '1px solid #E2DCCF',
+                  backgroundColor: 'rgba(255,255,255,0.04)',
+                  border: '1px solid rgba(201,168,76,0.12)',
                   borderRadius: '4px',
                   padding: '20px',
                   display: 'flex',
                   flexDirection: 'column',
                   gap: '10px',
-                  transition: 'border-color 0.2s, box-shadow 0.2s',
                   cursor: 'default',
                 }}
                 onMouseEnter={e => {
                   const el = e.currentTarget as HTMLDivElement
-                  el.style.borderColor = 'rgba(201,168,76,0.5)'
-                  el.style.boxShadow = '0 2px 12px rgba(0,0,0,0.06)'
+                  el.style.borderColor = 'rgba(201,168,76,0.35)'
+                  el.style.boxShadow = '0 4px 32px rgba(201,168,76,0.12)'
                 }}
                 onMouseLeave={e => {
                   const el = e.currentTarget as HTMLDivElement
-                  el.style.borderColor = '#E2DCCF'
+                  el.style.borderColor = 'rgba(201,168,76,0.12)'
                   el.style.boxShadow = 'none'
                 }}
               >
@@ -175,7 +176,7 @@ export default function ChapterWorkWithMe() {
                   fontFamily: '"Cormorant Garamond", Georgia, serif',
                   fontSize: '1.1rem',
                   fontWeight: 600,
-                  color: '#0F0F0E',
+                  color: '#F5F0E8',
                   lineHeight: 1.2,
                 }}>
                   {title}
@@ -183,7 +184,7 @@ export default function ChapterWorkWithMe() {
                 <div style={{
                   fontFamily: '"DM Sans", system-ui, sans-serif',
                   fontSize: '0.7rem',
-                  color: '#7A7060',
+                  color: 'rgba(245,240,232,0.55)',
                   lineHeight: 1.5,
                 }}>
                   {tags}
@@ -207,7 +208,7 @@ export default function ChapterWorkWithMe() {
             fontWeight: 600,
             letterSpacing: '0.2em',
             textTransform: 'uppercase',
-            color: '#7A7060',
+            color: 'rgba(245,240,232,0.4)',
             marginBottom: '24px',
           }}>
             How It Works
@@ -224,11 +225,11 @@ export default function ChapterWorkWithMe() {
                 variants={item}
                 style={{
                   padding: '28px 24px',
-                  borderLeft: i === 0 ? '1px solid #E2DCCF' : 'none',
-                  borderRight: '1px solid #E2DCCF',
-                  borderTop: '1px solid #E2DCCF',
-                  borderBottom: '1px solid #E2DCCF',
-                  backgroundColor: '#FDFCF8',
+                  borderLeft: i === 0 ? '1px solid rgba(201,168,76,0.15)' : 'none',
+                  borderRight: '1px solid rgba(201,168,76,0.15)',
+                  borderTop: '1px solid rgba(201,168,76,0.15)',
+                  borderBottom: '1px solid rgba(201,168,76,0.15)',
+                  backgroundColor: 'rgba(255,255,255,0.03)',
                 }}
               >
                 <div style={{
@@ -246,7 +247,7 @@ export default function ChapterWorkWithMe() {
                   fontFamily: '"Cormorant Garamond", Georgia, serif',
                   fontSize: '1.15rem',
                   fontWeight: 600,
-                  color: '#0F0F0E',
+                  color: '#F5F0E8',
                   marginBottom: '10px',
                   lineHeight: 1.2,
                 }}>
@@ -255,7 +256,7 @@ export default function ChapterWorkWithMe() {
                 <p style={{
                   fontFamily: '"Lora", Georgia, serif',
                   fontSize: '0.83rem',
-                  color: '#7A7060',
+                  color: 'rgba(245,240,232,0.55)',
                   lineHeight: 1.65,
                   margin: 0,
                 }}>
@@ -287,7 +288,7 @@ export default function ChapterWorkWithMe() {
               fontWeight: 600,
               letterSpacing: '0.2em',
               textTransform: 'uppercase',
-              color: '#7A7060',
+              color: 'rgba(245,240,232,0.4)',
               marginBottom: '24px',
             }}>
               Get In Touch
@@ -296,7 +297,7 @@ export default function ChapterWorkWithMe() {
             <p style={{
               fontFamily: '"Lora", Georgia, serif',
               fontSize: '0.9rem',
-              color: '#7A7060',
+              color: 'rgba(245,240,232,0.55)',
               lineHeight: 1.7,
               marginBottom: '28px',
             }}>
@@ -315,11 +316,11 @@ export default function ChapterWorkWithMe() {
                     alignItems: 'center',
                     gap: '12px',
                     textDecoration: 'none',
-                    color: '#3D3730',
+                    color: 'rgba(245,240,232,0.6)',
                     transition: 'color 0.2s',
                   }}
                   onMouseEnter={e => (e.currentTarget.style.color = '#C9A84C')}
-                  onMouseLeave={e => (e.currentTarget.style.color = '#3D3730')}
+                  onMouseLeave={e => (e.currentTarget.style.color = 'rgba(245,240,232,0.6)')}
                 >
                   <Icon size={16} color="currentColor" />
                   <span style={{
@@ -338,7 +339,7 @@ export default function ChapterWorkWithMe() {
             {formStatus === 'success' ? (
               <div style={{
                 padding: '40px',
-                backgroundColor: '#FDFCF8',
+                backgroundColor: 'rgba(255,255,255,0.04)',
                 border: '1px solid rgba(201,168,76,0.3)',
                 borderRadius: '4px',
                 textAlign: 'center',
@@ -347,7 +348,7 @@ export default function ChapterWorkWithMe() {
                   fontFamily: '"Cormorant Garamond", Georgia, serif',
                   fontSize: '1.6rem',
                   fontWeight: 600,
-                  color: '#0F0F0E',
+                  color: '#F5F0E8',
                   marginBottom: '12px',
                 }}>
                   Message received.
@@ -355,7 +356,7 @@ export default function ChapterWorkWithMe() {
                 <p style={{
                   fontFamily: '"Lora", Georgia, serif',
                   fontSize: '0.9rem',
-                  color: '#7A7060',
+                  color: 'rgba(245,240,232,0.55)',
                   lineHeight: 1.7,
                 }}>
                   Thanks for reaching out — I'll be in touch within 24 hours.
@@ -380,7 +381,7 @@ export default function ChapterWorkWithMe() {
                     onChange={e => setFormData(p => ({ ...p, name: e.target.value }))}
                     style={inputStyle}
                     onFocus={e => (e.currentTarget.style.borderColor = 'rgba(201,168,76,0.6)')}
-                    onBlur={e => (e.currentTarget.style.borderColor = '#E2DCCF')}
+                    onBlur={e => (e.currentTarget.style.borderColor = 'rgba(201,168,76,0.2)')}
                   />
                 </div>
 
@@ -396,7 +397,7 @@ export default function ChapterWorkWithMe() {
                     onChange={e => setFormData(p => ({ ...p, email: e.target.value }))}
                     style={inputStyle}
                     onFocus={e => (e.currentTarget.style.borderColor = 'rgba(201,168,76,0.6)')}
-                    onBlur={e => (e.currentTarget.style.borderColor = '#E2DCCF')}
+                    onBlur={e => (e.currentTarget.style.borderColor = 'rgba(201,168,76,0.2)')}
                   />
                 </div>
 
@@ -412,7 +413,7 @@ export default function ChapterWorkWithMe() {
                     onChange={e => setFormData(p => ({ ...p, message: e.target.value }))}
                     style={{ ...inputStyle, resize: 'vertical' }}
                     onFocus={e => (e.currentTarget.style.borderColor = 'rgba(201,168,76,0.6)')}
-                    onBlur={e => (e.currentTarget.style.borderColor = '#E2DCCF')}
+                    onBlur={e => (e.currentTarget.style.borderColor = 'rgba(201,168,76,0.2)')}
                   />
                 </div>
 
@@ -434,8 +435,8 @@ export default function ChapterWorkWithMe() {
                     fontSize: '0.82rem',
                     fontWeight: 600,
                     letterSpacing: '0.06em',
-                    color: '#FDFCF8',
-                    backgroundColor: formStatus === 'sending' ? '#7A7060' : '#0F0F0E',
+                    color: '#0F0F0E',
+                    backgroundColor: formStatus === 'sending' ? 'rgba(201,168,76,0.5)' : '#C9A84C',
                     border: 'none',
                     borderRadius: '4px',
                     padding: '14px 28px',
@@ -445,12 +446,12 @@ export default function ChapterWorkWithMe() {
                   }}
                   onMouseEnter={e => {
                     if (formStatus !== 'sending') {
-                      (e.currentTarget as HTMLButtonElement).style.backgroundColor = '#C9A84C'
+                      (e.currentTarget as HTMLButtonElement).style.backgroundColor = '#A88A2E'
                     }
                   }}
                   onMouseLeave={e => {
                     if (formStatus !== 'sending') {
-                      (e.currentTarget as HTMLButtonElement).style.backgroundColor = '#0F0F0E'
+                      (e.currentTarget as HTMLButtonElement).style.backgroundColor = '#C9A84C'
                     }
                   }}
                 >

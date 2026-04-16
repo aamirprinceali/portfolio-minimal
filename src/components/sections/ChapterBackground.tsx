@@ -82,21 +82,19 @@ export default function ChapterBackground() {
               {highlights.map(({ Icon, title, desc }) => (
                 <div
                   key={title}
+                  className="gold-glow"
                   style={{
                     padding: '20px',
                     backgroundColor: '#F5F2EA',
                     border: '1px solid #E2DCCF',
                     borderRadius: '4px',
-                    transition: 'border-color 0.2s, box-shadow 0.2s',
                     cursor: 'default',
                   }}
                   onMouseEnter={e => {
                     ;(e.currentTarget as HTMLDivElement).style.borderColor = 'rgba(201,168,76,0.5)'
-                    ;(e.currentTarget as HTMLDivElement).style.boxShadow = '0 2px 12px rgba(0,0,0,0.06)'
                   }}
                   onMouseLeave={e => {
                     ;(e.currentTarget as HTMLDivElement).style.borderColor = '#E2DCCF'
-                    ;(e.currentTarget as HTMLDivElement).style.boxShadow = 'none'
                   }}
                 >
                   <Icon size={18} color="#C9A84C" style={{ marginBottom: '10px' }} />

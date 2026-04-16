@@ -36,6 +36,32 @@ export default function CustomCursor() {
     }
   }, [])
 
+  // Interactive glow — ring glows gold when hovering links/buttons/cards
+  useEffect(() => {
+    if (window.matchMedia('(hover: none)').matches) return
+    const ring = ringRef.current
+    if (!ring) return
+
+    const onMove = (e: MouseEvent) => {
+      const el = document.elementFromPoint(e.clientX, e.clientY)
+      const isInteractive = el?.closest('a, button, [role="button"], [style*="cursor: pointer"], [style*="cursor:pointer"]')
+      if (isInteractive) {
+        ring.style.borderColor = 'rgba(201,168,76,0.7)'
+        ring.style.boxShadow = '0 0 12px rgba(201,168,76,0.35), 0 0 28px rgba(201,168,76,0.15)'
+        ring.style.width = '44px'
+        ring.style.height = '44px'
+      } else {
+        ring.style.borderColor = 'rgba(201,168,76,0.25)'
+        ring.style.boxShadow = 'none'
+        ring.style.width = '36px'
+        ring.style.height = '36px'
+      }
+    }
+
+    window.addEventListener('mousemove', onMove, { passive: true })
+    return () => window.removeEventListener('mousemove', onMove)
+  }, [])
+
   return (
     <>
       <div
@@ -43,11 +69,10 @@ export default function CustomCursor() {
         style={{
           position: 'fixed', top: 0, left: 0,
           width: '8px', height: '8px',
-          backgroundColor: '#1E3A5F',
+          backgroundColor: '#C9A84C',
           borderRadius: '50%',
           pointerEvents: 'none',
           zIndex: 9999,
-          mixBlendMode: 'multiply',
         }}
       />
       <div
@@ -55,10 +80,11 @@ export default function CustomCursor() {
         style={{
           position: 'fixed', top: 0, left: 0,
           width: '36px', height: '36px',
-          border: '1px solid rgba(30,58,95,0.35)',
+          border: '1px solid rgba(201,168,76,0.25)',
           borderRadius: '50%',
           pointerEvents: 'none',
           zIndex: 9999,
+          transition: 'width 0.2s ease, height 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease',
         }}
       />
     </>

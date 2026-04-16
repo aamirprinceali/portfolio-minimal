@@ -20,13 +20,14 @@ const item = { hidden: { opacity: 0, y: 24 }, visible: { opacity: 1, y: 0, trans
 
 export default function ChapterToolkit() {
   return (
-    <ChapterSection id="chapter-toolkit" backgroundColor="#F5F2EA">
+    <ChapterSection id="chapter-toolkit" backgroundColor="#0F0F0E">
       <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '96px 24px 80px' }}>
         <ChapterHeader
           number="02"
           chapter="The Toolkit"
           headline="AI &amp; Automation<br/>in my daily stack."
           deck="These aren't tools I've heard of — they're in my active workflow, running every day."
+          dark={true}
         />
 
         <motion.div
@@ -44,45 +45,41 @@ export default function ChapterToolkit() {
             <motion.div
               key={name}
               variants={item}
+              className="gold-glow-dark"
               style={{
-                backgroundColor: '#FDFCF8',
-                border: '1px solid #E2DCCF',
+                backgroundColor: 'rgba(255,255,255,0.04)',
+                border: '1px solid rgba(201,168,76,0.12)',
                 borderRadius: '4px',
                 padding: '24px',
                 display: 'flex',
                 flexDirection: 'column',
                 gap: '12px',
-                transition: 'border-color 0.2s, box-shadow 0.2s, transform 0.2s',
                 cursor: 'default',
-              }}
-              whileHover={{
-                y: -3,
-                transition: { duration: 0.2 },
               }}
               onMouseEnter={e => {
                 const el = e.currentTarget as HTMLDivElement
-                el.style.borderColor = 'rgba(201,168,76,0.5)'
-                el.style.boxShadow = '0 4px 20px rgba(0,0,0,0.07)'
+                el.style.borderColor = 'rgba(201,168,76,0.35)'
+                el.style.boxShadow = '0 4px 32px rgba(201,168,76,0.12)'
               }}
               onMouseLeave={e => {
                 const el = e.currentTarget as HTMLDivElement
-                el.style.borderColor = '#E2DCCF'
+                el.style.borderColor = 'rgba(201,168,76,0.12)'
                 el.style.boxShadow = 'none'
               }}
             >
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                 <Icon size={20} color="#C9A84C" />
-                <span style={{ fontFamily: '"DM Sans", system-ui, sans-serif', fontSize: '0.7rem', color: '#7A7060', fontVariantNumeric: 'tabular-nums' }}>{version}</span>
+                <span style={{ fontFamily: '"DM Sans", system-ui, sans-serif', fontSize: '0.7rem', color: 'rgba(245,240,232,0.3)', fontVariantNumeric: 'tabular-nums' }}>{version}</span>
               </div>
               <div>
-                <div style={{ fontFamily: '"Cormorant Garamond", Georgia, serif', fontSize: '1.35rem', fontWeight: 600, color: '#0F0F0E', lineHeight: 1.1, marginBottom: '6px' }}>{name}</div>
-                <p style={{ fontFamily: '"Lora", Georgia, serif', fontSize: '0.82rem', color: '#7A7060', lineHeight: 1.65 }}>{desc}</p>
+                <div style={{ fontFamily: '"Cormorant Garamond", Georgia, serif', fontSize: '1.35rem', fontWeight: 600, color: '#F5F0E8', lineHeight: 1.1, marginBottom: '6px' }}>{name}</div>
+                <p style={{ fontFamily: '"Lora", Georgia, serif', fontSize: '0.82rem', color: 'rgba(245,240,232,0.55)', lineHeight: 1.65 }}>{desc}</p>
               </div>
               <div>
                 <span style={{
                   fontFamily: '"DM Sans", system-ui, sans-serif', fontSize: '0.65rem', fontWeight: 500,
                   letterSpacing: '0.12em', textTransform: 'uppercase' as const,
-                  color: '#C9A84C', borderBottom: '1px solid rgba(201,168,76,0.3)',
+                  color: 'rgba(201,168,76,0.85)', borderBottom: '1px solid rgba(201,168,76,0.3)',
                   paddingBottom: '1px',
                 }}>
                   {category}

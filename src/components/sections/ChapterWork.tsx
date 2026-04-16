@@ -34,6 +34,7 @@ export default function ChapterWork() {
             <motion.div
               key={id}
               variants={item}
+              className="gold-glow"
               style={{
                 position: 'relative',
                 backgroundColor: '#F5F2EA',
@@ -44,7 +45,6 @@ export default function ChapterWork() {
                 flexDirection: 'column',
                 gap: '14px',
                 overflow: 'hidden',
-                transition: 'border-color 0.25s, box-shadow 0.25s',
               }}
               onMouseEnter={e => {
                 const el = e.currentTarget as HTMLDivElement

@@ -1,8 +1,6 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 
-const sectionEasing: [number, number, number, number] = [0.22, 1, 0.36, 1]
-
 interface ChapterSectionProps {
   id: string
   children: React.ReactNode
@@ -17,10 +15,10 @@ export default function ChapterSection({
   style = {},
 }: ChapterSectionProps) {
   const ref = useRef(null)
-  const inView = useInView(ref, { once: false, margin: '-8%' })
+  const inView = useInView(ref, { once: true, margin: '-5%' })
 
   return (
-    <motion.section
+    <section
       ref={ref}
       id={id}
       style={{
@@ -28,20 +26,32 @@ export default function ChapterSection({
         backgroundColor,
         position: 'relative',
         overflow: 'hidden',
-        transformStyle: 'preserve-3d',
         ...style,
       }}
-      initial={{ opacity: 0, y: 48, rotateX: -5 }}
-      animate={
-        inView
-          ? { opacity: 1, y: 0, rotateX: 0, transition: { duration: 0.9, ease: sectionEasing } }
-          : { opacity: 0, y: 48, rotateX: -5, transition: { duration: 0.4 } }
-      }
-      // perspective must be set on parent — use wrapper div trick
     >
-      <div style={{ perspective: '1400px' }}>
+      {/* Page wipe overlay — sweeps left to right then exits */}
+      <motion.div
+        initial={{ clipPath: 'inset(0 0% 0 0)' }}
+        animate={inView ? { clipPath: 'inset(0 100% 0 0)' } : { clipPath: 'inset(0 0% 0 0)' }}
+        transition={{ duration: 1.0, ease: [0.76, 0, 0.24, 1] as any, delay: 0.05 }}
+        style={{
+          position: 'absolute',
+          inset: 0,
+          backgroundColor: backgroundColor === '#0F0F0E' ? '#1A1510' : '#0F0F0E',
+          zIndex: 10,
+          pointerEvents: 'none',
+        }}
+      />
+
+      {/* Content — fades in after wipe */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={inView ? { opacity: 1 } : { opacity: 0 }}
+        transition={{ duration: 0.6, delay: 0.6 }}
+        style={{ position: 'relative', zIndex: 1 }}
+      >
         {children}
-      </div>
-    </motion.section>
+      </motion.div>
+    </section>
   )
 }

@@ -92,3 +92,21 @@ body::after {
   body::after { display: none; }
   #scroll-progress { display: none; }
 }
+
+/* Gold glow on hover — light sections */
+.gold-glow {
+  transition: box-shadow 0.35s ease, border-color 0.35s ease, transform 0.2s ease !important;
+}
+.gold-glow:hover {
+  box-shadow: 0 0 0 1px rgba(201,168,76,0.18), 0 6px 28px rgba(201,168,76,0.1), 0 0 56px rgba(201,168,76,0.05) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Gold glow on hover — dark sections (more visible) */
+.gold-glow-dark {
+  transition: box-shadow 0.35s ease, border-color 0.35s ease, transform 0.2s ease !important;
+}
+.gold-glow-dark:hover {
+  box-shadow: 0 0 0 1px rgba(201,168,76,0.28), 0 6px 36px rgba(201,168,76,0.18), 0 0 72px rgba(201,168,76,0.09) !important;
+  transform: translateY(-2px) !important;
+}
