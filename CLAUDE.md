@@ -11,6 +11,28 @@ Aamir's words: "like a refined professional" — expensive-feeling but not flash
 - Branch: main
 - Run locally: open `index.html` directly in browser — no build step needed
 
+## CURRENT DESIGN DIRECTION (2026-04-16 — APPROVED)
+
+### Fortune/Bloomberg Editorial Magazine / Book
+- Site opens as a black hardcover book — center split animation, covers slide apart
+- "AAMIR ALI" in gold Cormorant Garamond on the cover
+- Tagline on cover: **"Not a resume. A record."**
+- After cover opens: "In This Issue" chapter nav page
+- 5 chapters scroll as one page with page-fold Framer Motion transitions
+- CV is Chapter 04 (embedded — no separate page)
+- Work With Me is Chapter 05 (embedded — no separate page)
+
+### Design tokens (Fortune/Bloomberg)
+- Paper: #FDFCF8, Ink: #0F0F0E, Gold: #C9A84C, Surface: #F5F2EA, Border: #E2DCCF
+- Fonts: Cormorant Garamond (headings) + Lora (body, reads like print) + DM Sans (UI)
+
+### Plans
+- Original plan: `docs/plans/2026-04-13-portfolio-react-rebuild.md` (superseded)
+- Current plan: `docs/plans/2026-04-16-magazine-book-redesign.md` ← USE THIS ONE
+- Shared memory: `.ai/project/SHARED_MEMORY.md`
+
+---
+
 ## What Was Done Before This Chat
 - All content (HTML) copied from portfolio-site's `space-final` branch
 - Same 3 pages: `index.html`, `cv.html`, `work-with-me.html`
