@@ -188,16 +188,16 @@ export default function BookCover({ onOpen }: BookCoverProps) {
           }}
         />
 
-        {/* Name */}
+        {/* Name — foil shimmer sweeps across like light on a gold cover */}
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.65, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+          className="foil-shimmer"
           style={{
             fontFamily: '"Cormorant Garamond", Georgia, serif',
             fontSize: 'clamp(3.5rem, 10vw, 8rem)',
             fontWeight: 600,
-            color: '#C9A84C',
             letterSpacing: '0.1em',
             textTransform: 'uppercase',
             lineHeight: 0.88,

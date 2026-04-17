@@ -6,6 +6,7 @@ import ChapterToolkit from '../components/sections/ChapterToolkit'
 import ChapterWork from '../components/sections/ChapterWork'
 import ChapterRecord from '../components/sections/ChapterRecord'
 import ChapterWorkWithMe from '../components/sections/ChapterWorkWithMe'
+import ChapterProgress from '../components/layout/ChapterProgress'
 
 export default function Home() {
   const [bookOpen, setBookOpen] = useState(false)
@@ -13,6 +14,8 @@ export default function Home() {
   return (
     <div style={{ backgroundColor: '#FDFCF8' }}>
       <BookCover onOpen={() => setBookOpen(true)} />
+
+      <ChapterProgress visible={bookOpen} />
 
       <div
         style={{

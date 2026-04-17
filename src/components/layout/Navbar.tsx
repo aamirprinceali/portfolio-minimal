@@ -1,10 +1,18 @@
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
+
+const navLinks = [
+  { href: '#chapter-background', label: 'Background', id: 'chapter-background' },
+  { href: '#chapter-toolkit', label: 'Toolkit', id: 'chapter-toolkit' },
+  { href: '#chapter-work', label: 'Work', id: 'chapter-work' },
+  { href: '#chapter-record', label: 'CV', id: 'chapter-record' },
+  { href: '#chapter-work-with-me', label: 'Work With Me', id: 'chapter-work-with-me' },
+]
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
+  const [activeChapter, setActiveChapter] = useState<string | null>(null)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
@@ -12,13 +20,26 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  const navLinks = [
-    { href: '/#about', label: 'About' },
-    { href: '/#tools', label: 'AI & Automation' },
-    { href: '/#projects', label: 'Projects' },
-    { href: '/work-with-me', label: 'Work With Me' },
-    { href: '/cv', label: 'CV' },
-  ]
+  // Track which chapter is currently visible
+  useEffect(() => {
+    const observers: IntersectionObserver[] = []
+
+    navLinks.forEach(({ id }) => {
+      const el = document.getElementById(id)
+      if (!el) return
+
+      const obs = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) setActiveChapter(id)
+        },
+        { threshold: 0.3 }
+      )
+      obs.observe(el)
+      observers.push(obs)
+    })
+
+    return () => observers.forEach(obs => obs.disconnect())
+  }, [])
 
   return (
     <nav
@@ -36,34 +57,63 @@ export default function Navbar() {
       }}
     >
       <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 24px', height: '64px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <Link to="/" style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: '1.125rem', fontWeight: 600, color: '#C9A84C', textDecoration: 'none', letterSpacing: '0.02em' }}>
+        <a
+          href="#"
+          onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }) }}
+          style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: '1.125rem', fontWeight: 600, color: '#C9A84C', textDecoration: 'none', letterSpacing: '0.02em' }}
+        >
           Aamir Ali
-        </Link>
+        </a>
 
         {/* Desktop links */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '32px' }} className="hidden-mobile">
-          {navLinks.map(({ href, label }) => (
-            <a
-              key={href}
-              href={href}
-              style={{ fontSize: '0.875rem', fontWeight: 500, color: 'rgba(201,168,76,0.7)', textDecoration: 'none', transition: 'color 0.2s' }}
-              onMouseEnter={e => (e.currentTarget.style.color = '#C9A84C')}
-              onMouseLeave={e => (e.currentTarget.style.color = 'rgba(201,168,76,0.7)')}
-            >
-              {label}
-            </a>
-          ))}
+          {navLinks.map(({ href, label, id }) => {
+            const isActive = activeChapter === id
+            return (
+              <a
+                key={href}
+                href={href}
+                style={{
+                  fontSize: '0.8rem',
+                  fontWeight: 500,
+                  color: isActive ? '#C9A84C' : 'rgba(201,168,76,0.5)',
+                  textDecoration: 'none',
+                  transition: 'color 0.2s',
+                  letterSpacing: '0.04em',
+                  fontFamily: '"DM Sans", system-ui, sans-serif',
+                  position: 'relative',
+                }}
+                onMouseEnter={e => (e.currentTarget.style.color = '#C9A84C')}
+                onMouseLeave={e => (e.currentTarget.style.color = isActive ? '#C9A84C' : 'rgba(201,168,76,0.5)')}
+              >
+                {label}
+                {/* Active underline */}
+                {isActive && (
+                  <span style={{
+                    position: 'absolute',
+                    bottom: '-4px',
+                    left: 0,
+                    right: 0,
+                    height: '1px',
+                    backgroundColor: '#C9A84C',
+                    opacity: 0.6,
+                  }} />
+                )}
+              </a>
+            )
+          })}
         </div>
 
         {/* Available badge */}
         <a
-          href="/work-with-me"
+          href="#chapter-work-with-me"
           className="hidden-mobile"
           style={{
             display: 'flex', alignItems: 'center', gap: '8px',
             fontSize: '0.75rem', fontWeight: 500, color: '#C9A84C',
             border: '1px solid rgba(201,168,76,0.35)', borderRadius: '999px',
             padding: '6px 12px', textDecoration: 'none',
+            fontFamily: '"DM Sans", system-ui, sans-serif',
             transition: 'background 0.2s, border-color 0.2s',
           }}
           onMouseEnter={e => {
@@ -93,11 +143,15 @@ export default function Navbar() {
       {/* Mobile menu */}
       {open && (
         <div style={{ backgroundColor: 'rgba(15,15,14,0.96)', borderBottom: '1px solid rgba(201,168,76,0.12)', padding: '16px 24px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
-          {navLinks.map(({ href, label }) => (
+          {navLinks.map(({ href, label, id }) => (
             <a
               key={href}
               href={href}
-              style={{ fontSize: '0.875rem', fontWeight: 500, color: 'rgba(201,168,76,0.7)', textDecoration: 'none' }}
+              style={{
+                fontSize: '0.875rem', fontWeight: 500,
+                color: activeChapter === id ? '#C9A84C' : 'rgba(201,168,76,0.6)',
+                textDecoration: 'none',
+              }}
               onClick={() => setOpen(false)}
             >
               {label}

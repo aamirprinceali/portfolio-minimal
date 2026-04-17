@@ -110,3 +110,26 @@ body::after {
   box-shadow: 0 0 0 1px rgba(201,168,76,0.28), 0 6px 36px rgba(201,168,76,0.18), 0 0 72px rgba(201,168,76,0.09) !important;
   transform: translateY(-2px) !important;
 }
+
+/* Gold foil shimmer — sweeps across the name on the book cover */
+@keyframes gold-shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.foil-shimmer {
+  background: linear-gradient(
+    90deg,
+    #C9A84C 15%,
+    #E8C96A 35%,
+    #FFF5C0 48%,
+    #FFF9E8 52%,
+    #E8C96A 65%,
+    #C9A84C 85%
+  );
+  background-size: 250% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gold-shimmer 5s linear infinite;
+}
