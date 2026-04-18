@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import ChapterSection from '../ui/ChapterSection'
 import ChapterHeader from '../ui/ChapterHeader'
+import Tilt3D from '../ui/Tilt3D'
 import { HeartHandshake, Settings2, Bot, BarChart3 } from 'lucide-react'
 
 const bioText = [
@@ -80,7 +81,7 @@ export default function ChapterBackground() {
               }}
             >
               {highlights.map(({ Icon, title, desc }) => (
-                <div
+                <Tilt3D
                   key={title}
                   className="gold-glow"
                   style={{
@@ -89,12 +90,13 @@ export default function ChapterBackground() {
                     border: '1px solid #E2DCCF',
                     borderRadius: '4px',
                     cursor: 'default',
+                    transition: 'border-color 0.35s ease',
                   }}
-                  onMouseEnter={e => {
-                    ;(e.currentTarget as HTMLDivElement).style.borderColor = 'rgba(201,168,76,0.5)'
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor = 'rgba(201,168,76,0.5)'
                   }}
-                  onMouseLeave={e => {
-                    ;(e.currentTarget as HTMLDivElement).style.borderColor = '#E2DCCF'
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor = '#E2DCCF'
                   }}
                 >
                   <Icon size={18} color="#C9A84C" style={{ marginBottom: '10px' }} />
@@ -115,7 +117,7 @@ export default function ChapterBackground() {
                   }}>
                     {desc}
                   </div>
-                </div>
+                </Tilt3D>
               ))}
             </motion.div>
           </div>
@@ -155,15 +157,32 @@ export default function ChapterBackground() {
               </div>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
                 {skills.map(skill => (
-                  <span key={skill} style={{
-                    fontFamily: '"DM Sans", system-ui, sans-serif',
-                    fontSize: '0.75rem',
-                    color: '#3D3730',
-                    backgroundColor: '#F5F2EA',
-                    border: '1px solid #E2DCCF',
-                    borderRadius: '2px',
-                    padding: '4px 10px',
-                  }}>
+                  <span
+                    key={skill}
+                    style={{
+                      fontFamily: '"DM Sans", system-ui, sans-serif',
+                      fontSize: '0.75rem',
+                      color: '#3D3730',
+                      backgroundColor: '#F5F2EA',
+                      border: '1px solid #E2DCCF',
+                      borderRadius: '2px',
+                      padding: '4px 10px',
+                      cursor: 'default',
+                      transition: 'border-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease',
+                    }}
+                    onMouseEnter={e => {
+                      const el = e.currentTarget
+                      el.style.borderColor = 'rgba(201,168,76,0.45)'
+                      el.style.color = '#C9A84C'
+                      el.style.boxShadow = '0 0 0 1px rgba(201,168,76,0.1), 0 2px 12px rgba(201,168,76,0.08)'
+                    }}
+                    onMouseLeave={e => {
+                      const el = e.currentTarget
+                      el.style.borderColor = '#E2DCCF'
+                      el.style.color = '#3D3730'
+                      el.style.boxShadow = 'none'
+                    }}
+                  >
                     {skill}
                   </span>
                 ))}

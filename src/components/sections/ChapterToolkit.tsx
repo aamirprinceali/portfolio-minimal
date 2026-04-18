@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { Brain, Sparkles, Gem, Shuffle, Share2, Presentation, BookOpen, Palette } from 'lucide-react'
 import ChapterSection from '../ui/ChapterSection'
 import ChapterHeader from '../ui/ChapterHeader'
+import Tilt3D from '../ui/Tilt3D'
 
 const tools = [
   { Icon: Brain, name: 'ChatGPT', version: 'v4.0', category: 'LLM', desc: 'My go-to for drafting SOPs, brainstorming, rewriting communications, and research acceleration.' },
@@ -24,7 +25,7 @@ export default function ChapterToolkit() {
       <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '96px 24px 80px' }}>
         <ChapterHeader
           number="02"
-          chapter="The Toolkit"
+          chapter="The Arsenal"
           headline="AI &amp; Automation<br/>in my daily stack."
           deck="These aren't tools I've heard of — they're in my active workflow, running every day."
           dark={true}
@@ -42,10 +43,10 @@ export default function ChapterToolkit() {
           }}
         >
           {tools.map(({ Icon, name, version, category, desc }) => (
-            <motion.div
-              key={name}
-              variants={item}
+            <motion.div key={name} variants={item} style={{ display: 'contents' }}>
+            <Tilt3D
               className="gold-glow-dark"
+              intensity={6}
               style={{
                 backgroundColor: 'rgba(255,255,255,0.04)',
                 border: '1px solid rgba(201,168,76,0.12)',
@@ -55,16 +56,15 @@ export default function ChapterToolkit() {
                 flexDirection: 'column',
                 gap: '12px',
                 cursor: 'default',
+                transition: 'border-color 0.35s ease, box-shadow 0.35s ease',
               }}
-              onMouseEnter={e => {
-                const el = e.currentTarget as HTMLDivElement
-                el.style.borderColor = 'rgba(201,168,76,0.35)'
-                el.style.boxShadow = '0 4px 32px rgba(201,168,76,0.12)'
+              onMouseEnter={(e: React.MouseEvent<HTMLDivElement>) => {
+                e.currentTarget.style.borderColor = 'rgba(201,168,76,0.35)'
+                e.currentTarget.style.boxShadow = '0 4px 32px rgba(201,168,76,0.12)'
               }}
-              onMouseLeave={e => {
-                const el = e.currentTarget as HTMLDivElement
-                el.style.borderColor = 'rgba(201,168,76,0.12)'
-                el.style.boxShadow = 'none'
+              onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) => {
+                e.currentTarget.style.borderColor = 'rgba(201,168,76,0.12)'
+                e.currentTarget.style.boxShadow = 'none'
               }}
             >
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -85,6 +85,7 @@ export default function ChapterToolkit() {
                   {category}
                 </span>
               </div>
+            </Tilt3D>
             </motion.div>
           ))}
         </motion.div>

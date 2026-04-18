@@ -1,14 +1,17 @@
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 
 const chapters = [
   { num: '01', title: 'The Background', href: '#chapter-background' },
-  { num: '02', title: 'The Toolkit', href: '#chapter-toolkit' },
-  { num: '03', title: 'The Work', href: '#chapter-work' },
+  { num: '02', title: 'The Arsenal', href: '#chapter-toolkit' },
+  { num: '03', title: 'The Portfolio', href: '#chapter-work' },
   { num: '04', title: 'The Record', href: '#chapter-record' },
   { num: '05', title: 'Work With Me', href: '#chapter-work-with-me' },
 ]
 
 export default function ChapterNav() {
+  const [nameHovered, setNameHovered] = useState(false)
+
   return (
     <section
       id="chapter-nav"
@@ -57,44 +60,58 @@ export default function ChapterNav() {
               Profile Edition · 2026
             </motion.div>
 
-            {/* Name — the anchor */}
-            <div style={{ overflow: 'hidden', marginBottom: '4px' }}>
-              <motion.div
-                initial={{ clipPath: 'inset(0 100% 0 0)' }}
-                whileInView={{ clipPath: 'inset(0 0% 0 0)' }}
-                viewport={{ once: true }}
-                transition={{ duration: 1.6, ease: [0.16, 1, 0.3, 1] as any, delay: 0.1 }}
-              >
-                <h1 style={{
-                  fontFamily: '"Cormorant Garamond", Georgia, serif',
-                  fontSize: 'clamp(4.5rem, 10vw, 9rem)',
-                  fontWeight: 600,
-                  color: '#C9A84C',
-                  lineHeight: 0.88,
-                  letterSpacing: '-0.01em',
-                }}>
-                  Aamir
-                </h1>
-              </motion.div>
-            </div>
-            <div style={{ overflow: 'hidden', marginBottom: '40px' }}>
-              <motion.div
-                initial={{ clipPath: 'inset(0 100% 0 0)' }}
-                whileInView={{ clipPath: 'inset(0 0% 0 0)' }}
-                viewport={{ once: true }}
-                transition={{ duration: 1.6, ease: [0.16, 1, 0.3, 1] as any, delay: 0.22 }}
-              >
-                <h1 style={{
-                  fontFamily: '"Cormorant Garamond", Georgia, serif',
-                  fontSize: 'clamp(4.5rem, 10vw, 9rem)',
-                  fontWeight: 600,
-                  color: '#C9A84C',
-                  lineHeight: 0.88,
-                  letterSpacing: '-0.01em',
-                }}>
-                  Ali
-                </h1>
-              </motion.div>
+            {/* Name — foil shimmer on hover */}
+            <div
+              onMouseEnter={() => setNameHovered(true)}
+              onMouseLeave={() => setNameHovered(false)}
+              style={{ cursor: 'default', marginBottom: '40px' }}
+            >
+              <div style={{ overflow: 'hidden', marginBottom: '4px' }}>
+                <motion.div
+                  initial={{ clipPath: 'inset(0 100% 0 0)' }}
+                  whileInView={{ clipPath: 'inset(0 0% 0 0)' }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1.6, ease: [0.16, 1, 0.3, 1] as any, delay: 0.1 }}
+                >
+                  <h1
+                    className={nameHovered ? 'foil-shimmer' : ''}
+                    style={{
+                      fontFamily: '"Cormorant Garamond", Georgia, serif',
+                      fontSize: 'clamp(4.5rem, 10vw, 9rem)',
+                      fontWeight: 600,
+                      color: nameHovered ? undefined : '#C9A84C',
+                      lineHeight: 0.88,
+                      letterSpacing: '-0.01em',
+                      transition: 'opacity 0.3s ease',
+                    }}
+                  >
+                    Aamir
+                  </h1>
+                </motion.div>
+              </div>
+              <div style={{ overflow: 'hidden' }}>
+                <motion.div
+                  initial={{ clipPath: 'inset(0 100% 0 0)' }}
+                  whileInView={{ clipPath: 'inset(0 0% 0 0)' }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1.6, ease: [0.16, 1, 0.3, 1] as any, delay: 0.22 }}
+                >
+                  <h1
+                    className={nameHovered ? 'foil-shimmer' : ''}
+                    style={{
+                      fontFamily: '"Cormorant Garamond", Georgia, serif',
+                      fontSize: 'clamp(4.5rem, 10vw, 9rem)',
+                      fontWeight: 600,
+                      color: nameHovered ? undefined : '#C9A84C',
+                      lineHeight: 0.88,
+                      letterSpacing: '-0.01em',
+                      transition: 'opacity 0.3s ease',
+                    }}
+                  >
+                    Ali
+                  </h1>
+                </motion.div>
+              </div>
             </div>
 
             {/* Gold rule */}

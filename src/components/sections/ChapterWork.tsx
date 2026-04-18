@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
 import ChapterSection from '../ui/ChapterSection'
 import ChapterHeader from '../ui/ChapterHeader'
+import Tilt3D from '../ui/Tilt3D'
 import { projects } from '../../data/projects'
 
 const easing: [number, number, number, number] = [0.22, 1, 0.36, 1]
@@ -14,7 +15,7 @@ export default function ChapterWork() {
       <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '96px 24px 80px' }}>
         <ChapterHeader
           number="03"
-          chapter="The Work"
+          chapter="The Portfolio"
           headline="Real problems.<br/>Real solutions."
           deck="Each project is something built or a workflow designed to solve a specific need."
         />
@@ -31,10 +32,10 @@ export default function ChapterWork() {
           }}
         >
           {projects.map(({ id, title, description, tags, status, githubUrl }) => (
-            <motion.div
-              key={id}
-              variants={item}
+            <motion.div key={id} variants={item} style={{ display: 'contents' }}>
+            <Tilt3D
               className="gold-glow"
+              intensity={5}
               style={{
                 position: 'relative',
                 backgroundColor: '#F5F2EA',
@@ -45,19 +46,18 @@ export default function ChapterWork() {
                 flexDirection: 'column',
                 gap: '14px',
                 overflow: 'hidden',
+                transition: 'border-color 0.35s ease, box-shadow 0.35s ease',
               }}
-              onMouseEnter={e => {
-                const el = e.currentTarget as HTMLDivElement
-                el.style.borderColor = 'rgba(201,168,76,0.5)'
-                el.style.boxShadow = '0 4px 24px rgba(0,0,0,0.07)'
-                const accent = el.querySelector('.card-accent') as HTMLDivElement
+              onMouseEnter={(e: React.MouseEvent<HTMLDivElement>) => {
+                e.currentTarget.style.borderColor = 'rgba(201,168,76,0.5)'
+                e.currentTarget.style.boxShadow = '0 4px 24px rgba(0,0,0,0.07)'
+                const accent = e.currentTarget.querySelector('.card-accent') as HTMLDivElement
                 if (accent) accent.style.opacity = '1'
               }}
-              onMouseLeave={e => {
-                const el = e.currentTarget as HTMLDivElement
-                el.style.borderColor = '#E2DCCF'
-                el.style.boxShadow = 'none'
-                const accent = el.querySelector('.card-accent') as HTMLDivElement
+              onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) => {
+                e.currentTarget.style.borderColor = '#E2DCCF'
+                e.currentTarget.style.boxShadow = 'none'
+                const accent = e.currentTarget.querySelector('.card-accent') as HTMLDivElement
                 if (accent) accent.style.opacity = '0'
               }}
             >
@@ -152,6 +152,7 @@ export default function ChapterWork() {
                   View on GitHub <ArrowUpRight size={12} />
                 </a>
               )}
+            </Tilt3D>
             </motion.div>
           ))}
         </motion.div>
