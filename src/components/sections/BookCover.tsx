@@ -234,7 +234,7 @@ export default function BookCover({ onOpen }: BookCoverProps) {
             letterSpacing: '0.06em',
           }}
         >
-          Not a resume. A record.
+          Every chapter, earned.
         </motion.p>
 
         {/* Scroll/click prompt — bounces */}

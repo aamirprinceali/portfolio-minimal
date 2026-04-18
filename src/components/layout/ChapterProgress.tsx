@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 const chapters = [
   { id: 'chapter-background', label: 'Background' },
-  { id: 'chapter-toolkit', label: 'The Arsenal' },
+  { id: 'chapter-toolkit', label: 'The Craft' },
   { id: 'chapter-work', label: 'The Portfolio' },
   { id: 'chapter-record', label: 'The Record' },
   { id: 'chapter-work-with-me', label: 'Work With Me' },

@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 
 const chapters = [
   { num: '01', title: 'The Background', href: '#chapter-background' },
-  { num: '02', title: 'The Arsenal', href: '#chapter-toolkit' },
+  { num: '02', title: 'The Craft', href: '#chapter-toolkit' },
   { num: '03', title: 'The Portfolio', href: '#chapter-work' },
   { num: '04', title: 'The Record', href: '#chapter-record' },
   { num: '05', title: 'Work With Me', href: '#chapter-work-with-me' },

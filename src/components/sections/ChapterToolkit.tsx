@@ -25,7 +25,7 @@ export default function ChapterToolkit() {
       <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '96px 24px 80px' }}>
         <ChapterHeader
           number="02"
-          chapter="The Arsenal"
+          chapter="The Craft"
           headline="AI &amp; Automation<br/>in my daily stack."
           deck="These aren't tools I've heard of — they're in my active workflow, running every day."
           dark={true}

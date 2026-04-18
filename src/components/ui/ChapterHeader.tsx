@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 interface ChapterHeaderProps {
   number: string        // "01"
   chapter: string       // "The Background"
-  headline: string      // may contain HTML like "The story<br/>behind the work"
+  headline: string      // may contain HTML like "People first.<br/>Systems second."
   deck?: string         // optional italic lead sentence
   dark?: boolean        // true for dark background sections
 }
@@ -17,12 +17,12 @@ export default function ChapterHeader({ number, chapter, headline, deck, dark = 
 
   return (
     <div style={{ marginBottom: '64px' }}>
-      {/* Label row */}
+
+      {/* Label row — chapter number + ruled line + chapter name */}
       <motion.div
         initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.9, delay: 0.8 }}
         style={{
           display: 'flex',
           alignItems: 'center',
@@ -41,9 +41,8 @@ export default function ChapterHeader({ number, chapter, headline, deck, dark = 
         </span>
         <motion.div
           initial={{ scaleX: 0 }}
-          whileInView={{ scaleX: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] as any, delay: 0.1 }}
+          animate={{ scaleX: 1 }}
+          transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] as any, delay: 0.9 }}
           style={{ flex: 1, height: '1px', backgroundColor: ruleColor, transformOrigin: 'left' }}
         />
         <span style={{
@@ -59,32 +58,28 @@ export default function ChapterHeader({ number, chapter, headline, deck, dark = 
         </span>
       </motion.div>
 
-      {/* Headline — clipPath wipe reveal */}
-      <div style={{ overflow: 'hidden' }}>
-        <motion.h2
-          initial={{ clipPath: 'inset(0 100% 0 0)' }}
-          whileInView={{ clipPath: 'inset(0 0% 0 0)' }}
-          viewport={{ once: true, margin: '-40px' }}
-          transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] as any, delay: 0.15 }}
-          style={{
-            fontFamily: '"Cormorant Garamond", Georgia, serif',
-            fontSize: 'clamp(3rem, 7vw, 6.5rem)',
-            fontWeight: 600,
-            color: textColor,
-            lineHeight: 1.0,
-            letterSpacing: '-0.02em',
-          }}
-          dangerouslySetInnerHTML={{ __html: headline }}
-        />
-      </div>
+      {/* Headline — fades up after section wipe completes */}
+      <motion.h2
+        initial={{ opacity: 0, y: 24 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] as any, delay: 1.0 }}
+        style={{
+          fontFamily: '"Cormorant Garamond", Georgia, serif',
+          fontSize: 'clamp(3rem, 7vw, 6.5rem)',
+          fontWeight: 600,
+          color: textColor,
+          lineHeight: 1.0,
+          letterSpacing: '-0.02em',
+        }}
+        dangerouslySetInnerHTML={{ __html: headline }}
+      />
 
       {/* Deck */}
       {deck && (
         <motion.p
           initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.5 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 1.2 }}
           style={{
             marginTop: '24px',
             fontFamily: '"Lora", Georgia, serif',
