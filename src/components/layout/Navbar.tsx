@@ -3,7 +3,7 @@ import { Menu, X } from 'lucide-react'
 
 const navLinks = [
   { href: '#chapter-background', label: 'Background', id: 'chapter-background' },
-  { href: '#chapter-toolkit', label: 'The Craft', id: 'chapter-toolkit' },
+  { href: '#chapter-toolkit', label: 'The Stack', id: 'chapter-toolkit' },
   { href: '#chapter-work', label: 'Portfolio', id: 'chapter-work' },
   { href: '#chapter-record', label: 'CV', id: 'chapter-record' },
   { href: '#chapter-work-with-me', label: 'Work With Me', id: 'chapter-work-with-me' },

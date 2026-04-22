@@ -101,9 +101,13 @@ Remove these artifacts that are still present in the copied HTML:
 ## How to Run
 ```bash
 cd ~/Desktop/dev/portfolio-minimal
-open index.html        # Mac — opens in default browser
-# or drag index.html into browser
+npm run dev
+# Open http://localhost:5173 in browser
+# If port is taken, Vite picks the next one — check terminal for the exact URL
 ```
+
+> This is a React + Vite + TypeScript app. It does NOT run by opening index.html.
+> Always use `npm run dev`.
 
 ## Session Start Checklist
 1. Read this file fully

@@ -191,15 +191,17 @@ export default function ChapterRecord() {
           </div>
 
           <div style={{ position: 'relative', paddingLeft: '32px' }}>
-            {/* Vertical gold line */}
-            <div style={{
-              position: 'absolute',
-              left: '6px',
-              top: '8px',
-              bottom: '8px',
-              width: '1px',
-              backgroundColor: '#E2DCCF',
-            }} />
+            {/* Vertical line — slow gold shimmer travels down it */}
+            <div
+              className="timeline-shimmer-line"
+              style={{
+                position: 'absolute',
+                left: '6px',
+                top: '8px',
+                bottom: '8px',
+                width: '1px',
+              }}
+            />
 
             {timeline.map((entry, i) => (
               <motion.div
@@ -210,18 +212,20 @@ export default function ChapterRecord() {
                   marginBottom: i < timeline.length - 1 ? '36px' : 0,
                 }}
               >
-                {/* Gold dot */}
-                <div style={{
-                  position: 'absolute',
-                  left: '-29px',
-                  top: '6px',
-                  width: '10px',
-                  height: '10px',
-                  borderRadius: '50%',
-                  backgroundColor: i === timeline.length - 1 ? '#C9A84C' : '#E2DCCF',
-                  border: i === timeline.length - 1 ? '2px solid #C9A84C' : '2px solid #C9A84C',
-                  boxShadow: i === timeline.length - 1 ? '0 0 0 3px rgba(201,168,76,0.15)' : 'none',
-                }} />
+                {/* Dot — all gold, most-recent pulses */}
+                <div
+                  className={i === timeline.length - 1 ? 'timeline-dot-pulse' : undefined}
+                  style={{
+                    position: 'absolute',
+                    left: '-29px',
+                    top: '6px',
+                    width: '10px',
+                    height: '10px',
+                    borderRadius: '50%',
+                    backgroundColor: '#C9A84C',
+                    border: '2px solid #C9A84C',
+                  }}
+                />
 
                 <div style={{
                   fontFamily: '"DM Sans", system-ui, sans-serif',

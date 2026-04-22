@@ -6,6 +6,7 @@ import {
 } from 'lucide-react'
 import ChapterSection from '../ui/ChapterSection'
 import ChapterHeader from '../ui/ChapterHeader'
+import Tilt3D from '../ui/Tilt3D'
 
 const services = [
   { Icon: Workflow, title: 'Automation Setup & Integration', tags: 'n8n, Zapier, Make, Notion' },
@@ -220,48 +221,59 @@ export default function ChapterWorkWithMe() {
             gap: '0',
           }}>
             {steps.map(({ number, title, desc }, i) => (
-              <motion.div
-                key={number}
-                variants={item}
-                style={{
-                  padding: '28px 24px',
-                  borderLeft: i === 0 ? '1px solid rgba(201,168,76,0.15)' : 'none',
-                  borderRight: '1px solid rgba(201,168,76,0.15)',
-                  borderTop: '1px solid rgba(201,168,76,0.15)',
-                  borderBottom: '1px solid rgba(201,168,76,0.15)',
-                  backgroundColor: 'rgba(255,255,255,0.03)',
-                }}
-              >
-                <div style={{
-                  fontFamily: '"Cormorant Garamond", Georgia, serif',
-                  fontStyle: 'italic',
-                  fontSize: '2rem',
-                  fontWeight: 500,
-                  color: '#C9A84C',
-                  lineHeight: 1,
-                  marginBottom: '12px',
-                }}>
-                  {number}
-                </div>
-                <div style={{
-                  fontFamily: '"Cormorant Garamond", Georgia, serif',
-                  fontSize: '1.15rem',
-                  fontWeight: 600,
-                  color: '#F5F0E8',
-                  marginBottom: '10px',
-                  lineHeight: 1.2,
-                }}>
-                  {title}
-                </div>
-                <p style={{
-                  fontFamily: '"Lora", Georgia, serif',
-                  fontSize: '0.83rem',
-                  color: 'rgba(245,240,232,0.55)',
-                  lineHeight: 1.65,
-                  margin: 0,
-                }}>
-                  {desc}
-                </p>
+              <motion.div key={number} variants={item}>
+                <Tilt3D
+                  intensity={5}
+                  style={{
+                    padding: '28px 24px',
+                    borderLeft: i === 0 ? '1px solid rgba(201,168,76,0.15)' : 'none',
+                    borderRight: '1px solid rgba(201,168,76,0.15)',
+                    borderTop: '1px solid rgba(201,168,76,0.15)',
+                    borderBottom: '1px solid rgba(201,168,76,0.15)',
+                    backgroundColor: 'rgba(255,255,255,0.03)',
+                    transition: 'border-color 0.3s ease, box-shadow 0.3s ease',
+                    cursor: 'default',
+                  }}
+                  onMouseEnter={(e: React.MouseEvent<HTMLDivElement>) => {
+                    e.currentTarget.style.borderColor = 'rgba(201,168,76,0.32)'
+                    e.currentTarget.style.boxShadow = '0 6px 32px rgba(201,168,76,0.1), inset 0 0 0 1px rgba(201,168,76,0.12)'
+                  }}
+                  onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) => {
+                    e.currentTarget.style.borderColor = 'rgba(201,168,76,0.15)'
+                    e.currentTarget.style.boxShadow = 'none'
+                  }}
+                >
+                  <div style={{
+                    fontFamily: '"Cormorant Garamond", Georgia, serif',
+                    fontStyle: 'italic',
+                    fontSize: '2rem',
+                    fontWeight: 500,
+                    color: '#C9A84C',
+                    lineHeight: 1,
+                    marginBottom: '12px',
+                  }}>
+                    {number}
+                  </div>
+                  <div style={{
+                    fontFamily: '"Cormorant Garamond", Georgia, serif',
+                    fontSize: '1.15rem',
+                    fontWeight: 600,
+                    color: '#F5F0E8',
+                    marginBottom: '10px',
+                    lineHeight: 1.2,
+                  }}>
+                    {title}
+                  </div>
+                  <p style={{
+                    fontFamily: '"Lora", Georgia, serif',
+                    fontSize: '0.83rem',
+                    color: 'rgba(245,240,232,0.55)',
+                    lineHeight: 1.65,
+                    margin: 0,
+                  }}>
+                    {desc}
+                  </p>
+                </Tilt3D>
               </motion.div>
             ))}
           </div>
