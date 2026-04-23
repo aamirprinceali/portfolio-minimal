@@ -129,21 +129,21 @@ export default function ChapterToolkit() {
         {/* Flip hint */}
         <div style={{
           fontFamily: '"DM Sans", system-ui, sans-serif',
-          fontSize: '0.65rem',
+          fontSize: '0.7rem',
           fontWeight: 500,
-          letterSpacing: '0.18em',
+          letterSpacing: '0.14em',
           textTransform: 'uppercase',
-          color: 'rgba(201,168,76,0.45)',
+          color: 'rgba(245,240,232,0.7)',
           textAlign: 'center',
-          marginBottom: '24px',
+          marginBottom: '28px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          gap: '12px',
+          gap: '16px',
         }}>
-          <span style={{ flex: 1, height: '1px', backgroundColor: 'rgba(201,168,76,0.1)' }} />
-          click any card to reveal more of the stack
-          <span style={{ flex: 1, height: '1px', backgroundColor: 'rgba(201,168,76,0.1)' }} />
+          <span style={{ flex: 1, height: '1px', backgroundColor: 'rgba(201,168,76,0.3)' }} />
+          <span>Click any card to reveal more of the stack</span>
+          <span style={{ flex: 1, height: '1px', backgroundColor: 'rgba(201,168,76,0.3)' }} />
         </div>
 
         <motion.div
