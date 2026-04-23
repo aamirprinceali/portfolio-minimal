@@ -1,48 +1,93 @@
 # Session Handoff — Portfolio Minimal
 
-Last session: 2026-04-16
+Last session: 2026-04-23
 
-## Status: COMPLETE — ready for review
+## Status: READY FOR VERCEL DEPLOY
 
 ## What Was Built This Session
-The full Fortune/Bloomberg editorial magazine/book portfolio is complete.
 
-### All components built:
-- BookCover.tsx — cinematic hardcover split-open animation (black cover, gold name, two panels slide apart)
-- ChapterNav.tsx — "In This Issue" table of contents page
-- ChapterSection.tsx — reusable page-fold reveal wrapper (Framer Motion rotateX)
-- ChapterHeader.tsx — editorial chapter number + ruled line + display headline + italic deck
-- ChapterBackground.tsx — Chapter 01: two-column bio, pull quote, skills sidebar, highlight cards
-- ChapterToolkit.tsx — Chapter 02: 8 tool cards in editorial grid
-- ChapterWork.tsx — Chapter 03: 6 project cards with gold hover accent
-- ChapterRecord.tsx — Chapter 04: full CV (timeline, experience, skills, education, print button)
-- ChapterWorkWithMe.tsx — Chapter 05: 9 services, 4-step process, Web3Forms contact form
+### Flip Cards — Chapter 02 "The Stack"
+- Chapter renamed from "The Craft" to "The Stack" (chapter header + navbar)
+- New deck copy: "These aren't tools I've read about — they're part of my daily stack. The list below is just a starting point."
+- All 8 tool cards now flip on click — front shows existing tool, back reveals a paired tool:
+  - ChatGPT → Codex
+  - Claude → Claude Code
+  - Gemini → Google Cloud (GCP)
+  - n8n → Zapier
+  - Blotato → HubSpot CRM
+  - Gamma → Zoho CRM
+  - Notion → Supabase
+  - Canva → Twilio
+- Editorial hint above grid, "just some of the tools in rotation" line below
+- Footer: "These are just some of the tools in rotation — the stack keeps growing."
 
-### Architecture:
-- Single page (/) — no routing for content
-- Book cover opens → ChapterNav → 5 chapters scroll as one page
-- Build passes: npm run build ✅ (418kb JS, 30kb CSS, zero errors)
-- Pushed to GitHub: main branch ✅
+### Book Cover Animation (BookCover.tsx)
+- Name "AAMIR ALI" now stamps in letter by letter with stagger (0.055s per letter)
+- Gold underline draws left → right beneath the name after letters finish
+- "Operations & Customer Success Professional" types itself out character by character with blinking cursor
+- Tagline "Every chapter, earned." fades in after typewriter completes
+- Scroll hint delayed to 3s so all animations finish first
+
+### How It Works — Chapter 05 (ChapterWorkWithMe.tsx)
+- All 4 step cards now have Tilt3D 3D hover effect
+- Subtle gold glow + border highlight on hover
+- Matches the premium feel of the rest of the dark chapters
+
+### Career Timeline — Chapter 04 (ChapterRecord.tsx)
+- Vertical line has a slow shimmer that travels down it (gold light passing through)
+- Most recent role dot (HelloHero) has a soft pulsing gold ring animation
+- All dots are now gold (not gray for older entries)
+
+### CSS additions (index.css)
+- `@keyframes timeline-shimmer` — travels down the timeline line
+- `@keyframes dot-ring` — soft pulsing ring on current role dot
+- `.timeline-shimmer-line` and `.timeline-dot-pulse` CSS classes
+
+### DEV-COMMANDS.md
+- Updated portfolio-minimal port to 5175 (most common when Prospect + Clarity are running)
+- Added note that it's React + Vite, NOT a static HTML file
+
+## GitHub
+- Repo: https://github.com/aamirprinceali/portfolio-minimal
+- Branch: main
+- Commit: "Add flip cards, name animation, timeline shimmer, and 3D step cards"
+- Status: PUSHED ✅
 
 ## To view the site
 ```bash
 cd ~/Desktop/dev/portfolio-minimal
 npm run dev
-# Open http://localhost:5173
-# Scroll or click to open the book
+# Open http://localhost:5175 (check terminal for exact port)
 ```
 
-## What's Left (future sessions)
-1. Visual QA — review design, animations, typography on localhost
-2. Mobile responsive polish (highlight cards 2x2 should go 1x1 on mobile, etc.)
-3. Vercel deployment
-4. Get production URL → share with Aamir to link from space portfolio as "Professional" choice
-5. Optional: Navbar chapter-aware highlighting (shows which chapter is currently visible)
+## What's Left — Next Session
 
-## Key facts for next session
-- Tagline: "Not a resume. A record."
+### Priority 1: Vercel Deploy
+1. Run `npm run build` to confirm clean build
+2. Go to vercel.com → New Project → Import from GitHub
+3. Pick `aamirprinceali/portfolio-minimal`
+4. Click Deploy — no config needed, Vite detected automatically
+5. Get the `portfolio-minimal-xxx.vercel.app` URL
+6. Share with recruiters and friends for preview
+
+### Priority 2: Link from Portfolio Gateway
+- Once deployed, add the real Vercel URL to `portfolio-gateway/js/gateway.js` as the "Professional" option
+- Space portfolio links to this as the "Professional" choice
+
+### Priority 3: Mobile polish (optional before deploy)
+- Highlight cards 2x2 → 1x1 on mobile
+- Contact section 2-col → 1-col on small screens
+- Flip cards grid: 2-col on tablet, 1-col on phone
+
+### Ideas Backlog (from this session — do later)
+- Animated stats strip below book cover (5+ years · 4 apps shipped · 3 certifications)
+- Chapter-aware navbar: already working, could show "Chapter 02 — The Stack" instead of just highlighting
+- "Download the Record" button styled as magazine CTA in Chapter 04
+
+## Key Facts for Next Session
 - Role title: "Operations & Customer Success Professional"
+- Tagline: "Every chapter, earned."
 - Web3Forms key: 61182368-6cdc-4631-9ac8-be2a5293d520
 - GitHub: https://github.com/aamirprinceali/portfolio-minimal
-- This site will be linked FROM portfolio-site (space portfolio) as "Professional" option
+- This site links FROM portfolio-site (space portfolio) as the "Professional" option
 - Design plan: docs/plans/2026-04-16-magazine-book-redesign.md
