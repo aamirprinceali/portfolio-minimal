@@ -1,8 +1,8 @@
 # Session Handoff — Portfolio Minimal
 
-Last session: 2026-04-23
+Last session: 2026-04-24
 
-## Status: READY FOR VERCEL DEPLOY
+## Status: READY FOR VERCEL DEPLOY — all polish done, nothing left to build
 
 ## What Was Built This Session
 
@@ -47,11 +47,17 @@ Last session: 2026-04-23
 - Updated portfolio-minimal port to 5175 (most common when Prospect + Clarity are running)
 - Added note that it's React + Vite, NOT a static HTML file
 
+## Final Polish (2026-04-24)
+- "Click any card" hint: warm off-white at 70% opacity — now clearly readable on dark background
+- Timeline shimmer: tighter bright point, faster travel — much more visible on the 1px line
+- **Lenis smooth scroll installed (v1.3.23)** — all page scrolling now has weighted momentum/deceleration, feels cinematic and premium. Wired into App.tsx.
+- Lenis added per updated frontend-design skill which now lists it as standard for premium sites
+
 ## GitHub
 - Repo: https://github.com/aamirprinceali/portfolio-minimal
 - Branch: main
-- Commit: "Add flip cards, name animation, timeline shimmer, and 3D step cards"
-- Status: PUSHED ✅
+- Latest commit: "Polish: readable flip hint, stronger timeline shimmer, Lenis smooth scroll"
+- Status: PUSHED ✅ — clean, nothing uncommitted
 
 ## To view the site
 ```bash
