@@ -1,23 +1,72 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import {
-  Workflow, Globe, Bot, ClipboardList, Wrench, PenLine,
-  FileText, BookOpen, Mic, Mail, Phone, Link2, Code2,
+  Workflow, Search, Bot, ClipboardList, Wrench, BarChart3,
+  FileText, Globe, TrendingUp, Mail, Phone, Link2, Code2,
+  CheckCircle2,
 } from 'lucide-react'
 import ChapterSection from '../ui/ChapterSection'
 import ChapterHeader from '../ui/ChapterHeader'
 import Tilt3D from '../ui/Tilt3D'
 
-const services = [
-  { Icon: Workflow, title: 'Automation Setup & Integration', tags: 'n8n, Zapier, Make, Notion' },
-  { Icon: Globe, title: 'Website Design & Development', tags: 'HTML/CSS/JS, Responsive, Fast Load' },
-  { Icon: Bot, title: 'AI Training & Consulting', tags: 'ChatGPT, Claude, Gemini, Prompt Eng.' },
-  { Icon: ClipboardList, title: 'Operations Consulting', tags: 'SOPs, Process Mapping, Team Workflows' },
-  { Icon: Wrench, title: 'Custom Tool Building', tags: 'Internal Tools, Dashboards, Automation' },
-  { Icon: PenLine, title: 'Content Creation', tags: 'Social Media, Copy, Documentation, Blotato' },
-  { Icon: FileText, title: 'Resume Writing', tags: 'Resume, CV, LinkedIn' },
-  { Icon: BookOpen, title: 'SOPs & Training Guides', tags: 'SOPs, Onboarding, Training Docs' },
-  { Icon: Mic, title: 'Script Writing', tags: 'Sales Scripts, Call Cadences, Outreach' },
+const operationsServices = [
+  {
+    Icon: ClipboardList,
+    title: 'Operations Audit',
+    desc: 'I review how your business actually runs — team workflows, handoffs, tools, and bottlenecks — and give you a clear picture of what to fix first.',
+    tags: 'Process mapping · SOP gaps · Team efficiency',
+  },
+  {
+    Icon: Workflow,
+    title: 'Workflow & Automation Setup',
+    desc: 'I build automations that eliminate repetitive manual work — connecting your tools and creating systems that run without you.',
+    tags: 'n8n · Zapier · Make · Notion · Airtable',
+  },
+  {
+    Icon: Bot,
+    title: 'AI Integration Consulting',
+    desc: 'I help teams identify where AI saves real time, then set it up — from prompt workflows to custom tools that fit how your team already works.',
+    tags: 'ChatGPT · Claude · Gemini · Prompt Engineering',
+  },
+  {
+    Icon: Wrench,
+    title: 'Custom Internal Tools & Dashboards',
+    desc: 'If you\'re tracking things in spreadsheets or managing teams through scattered messages, I build the tool that brings it all into one place.',
+    tags: 'Custom dashboards · Internal tools · Data visibility',
+  },
+  {
+    Icon: FileText,
+    title: 'SOPs & Team Documentation',
+    desc: 'I write the SOPs, onboarding guides, and training docs that let your team operate consistently — even when you\'re not in the room.',
+    tags: 'Standard operating procedures · Onboarding · Training',
+  },
+]
+
+const marketingServices = [
+  {
+    Icon: Search,
+    title: 'SEO Audit & Technical Optimization',
+    desc: 'I review your site and identify everything hurting your Google ranking — missing metadata, slow load times, bad structure — then fix it.',
+    tags: 'Meta tags · Schema markup · Core Web Vitals',
+  },
+  {
+    Icon: Globe,
+    title: 'Website Design & Development',
+    desc: 'I build clean, fast, SEO-ready websites that convert visitors into leads — using modern tools and following Google\'s best practices from day one.',
+    tags: 'React · Next.js · Responsive · Fast load',
+  },
+  {
+    Icon: TrendingUp,
+    title: 'Google & Meta Ads Management',
+    desc: 'I run and manage paid ad campaigns on Google and Facebook/Instagram — targeting the right people, at the right time, for the right budget.',
+    tags: 'Google Ads · Meta Ads · Campaign setup · Reporting',
+  },
+  {
+    Icon: BarChart3,
+    title: 'Content & SEO Strategy',
+    desc: 'I build a keyword-targeted content plan and write the articles, pages, and case studies that earn Google rankings over time.',
+    tags: 'Keyword research · Blog content · Local SEO',
+  },
 ]
 
 const steps = [
@@ -34,12 +83,12 @@ const steps = [
   {
     number: '03',
     title: 'I do the work',
-    desc: 'I build, consult, or document — clearly and efficiently. You stay in the loop throughout the whole process.',
+    desc: 'I build, consult, or document — clearly and on schedule. You stay in the loop throughout.',
   },
   {
     number: '04',
     title: 'You own it',
-    desc: 'Everything I build or document is yours. I walk you through it and make sure you can run it independently.',
+    desc: 'Everything I build is yours. I walk you through it and make sure you can run it independently going forward.',
   },
 ]
 
@@ -57,6 +106,35 @@ const fadeUp = { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, tra
 
 type FormStatus = 'idle' | 'sending' | 'success' | 'error'
 
+const pillarHeadingStyle: React.CSSProperties = {
+  fontFamily: '"DM Sans", system-ui, sans-serif',
+  fontSize: '0.62rem',
+  fontWeight: 600,
+  letterSpacing: '0.2em',
+  textTransform: 'uppercase',
+  color: 'rgba(245,240,232,0.4)',
+  marginBottom: '6px',
+}
+
+const pillarTitleStyle: React.CSSProperties = {
+  fontFamily: '"Cormorant Garamond", Georgia, serif',
+  fontSize: '1.65rem',
+  fontWeight: 600,
+  color: '#F5F0E8',
+  lineHeight: 1.1,
+  marginBottom: '8px',
+}
+
+const pillarDescStyle: React.CSSProperties = {
+  fontFamily: '"Lora", Georgia, serif',
+  fontStyle: 'italic',
+  fontSize: '0.88rem',
+  color: 'rgba(245,240,232,0.5)',
+  lineHeight: 1.65,
+  marginBottom: '28px',
+  maxWidth: '440px',
+}
+
 export default function ChapterWorkWithMe() {
   const [formStatus, setFormStatus] = useState<FormStatus>('idle')
   const [formData, setFormData] = useState({ name: '', email: '', message: '' })
@@ -64,16 +142,11 @@ export default function ChapterWorkWithMe() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setFormStatus('sending')
-
     try {
-      const form = e.currentTarget
-      const data = new FormData(form)
-
       const res = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        body: data,
+        body: new FormData(e.currentTarget),
       })
-
       if (res.ok) {
         setFormStatus('success')
         setFormData({ name: '', email: '', message: '' })
@@ -113,44 +186,197 @@ export default function ChapterWorkWithMe() {
   return (
     <ChapterSection id="chapter-work-with-me" backgroundColor="#0F0F0E">
       <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '96px 24px 80px' }}>
+
         <ChapterHeader
           number="05"
           chapter="Work With Me"
-          headline="Let's build<br/>something useful."
-          deck="I take on a small number of freelance projects — automation, ops consulting, website builds, and AI integration."
+          headline="Fix what's broken inside.<br/>Build what brings people in."
+          deck="Freelance operations consulting and SEO services for small businesses in the Dallas–Fort Worth area and remote. I solve two problems most businesses have at the same time."
           dark={true}
         />
 
-        {/* Services grid */}
+        {/* Availability badge */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, ease: easing }}
+          style={{ marginBottom: '72px' }}
+        >
+          <div style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '10px',
+            backgroundColor: 'rgba(201,168,76,0.08)',
+            border: '1px solid rgba(201,168,76,0.25)',
+            borderRadius: '4px',
+            padding: '10px 18px',
+          }}>
+            <span style={{
+              display: 'inline-block',
+              width: '7px',
+              height: '7px',
+              borderRadius: '50%',
+              backgroundColor: '#4ade80',
+              boxShadow: '0 0 0 3px rgba(74,222,128,0.2)',
+            }} />
+            <span style={{
+              fontFamily: '"DM Sans", system-ui, sans-serif',
+              fontSize: '0.78rem',
+              fontWeight: 500,
+              color: 'rgba(245,240,232,0.75)',
+              letterSpacing: '0.02em',
+            }}>
+              Currently available for freelance clients — Plano / DFW area &amp; remote
+            </span>
+          </div>
+        </motion.div>
+
+        {/* The two-problem pitch */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-60px' }}
+          variants={container}
+          style={{
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr',
+            gap: '2px',
+            marginBottom: '80px',
+            border: '1px solid rgba(201,168,76,0.15)',
+            borderRadius: '4px',
+            overflow: 'hidden',
+          }}
+        >
+          {/* Left: the internal problem */}
+          <motion.div
+            variants={item}
+            style={{
+              padding: '40px 36px',
+              backgroundColor: 'rgba(255,255,255,0.03)',
+              borderRight: '1px solid rgba(201,168,76,0.12)',
+            }}
+          >
+            <div style={pillarHeadingStyle}>Problem One</div>
+            <div style={pillarTitleStyle}>Your operations are holding you back.</div>
+            <p style={pillarDescStyle}>
+              Missed handoffs. No SOPs. Team doing everything manually. Work that should take 10 minutes takes 2 hours. I audit how your business actually runs and build the systems, automations, and documentation that fix it.
+            </p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              {[
+                'Operations audit — find every bottleneck',
+                'Workflow automation (n8n, Zapier, Make)',
+                'AI tool integration for your team',
+                'SOPs, onboarding guides, training docs',
+                'Custom dashboards and internal tools',
+              ].map(point => (
+                <div key={point} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
+                  <CheckCircle2 size={14} color="#C9A84C" style={{ marginTop: '3px', flexShrink: 0 }} />
+                  <span style={{
+                    fontFamily: '"DM Sans", system-ui, sans-serif',
+                    fontSize: '0.8rem',
+                    color: 'rgba(245,240,232,0.6)',
+                    lineHeight: 1.5,
+                  }}>
+                    {point}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Right: the external problem */}
+          <motion.div
+            variants={item}
+            style={{
+              padding: '40px 36px',
+              backgroundColor: 'rgba(201,168,76,0.04)',
+            }}
+          >
+            <div style={pillarHeadingStyle}>Problem Two</div>
+            <div style={pillarTitleStyle}>Nobody can find you online.</div>
+            <p style={pillarDescStyle}>
+              Your website exists but Google doesn't know about it. No meta tags, no structure, no content strategy. You're invisible to the exact people looking for what you offer. I fix the technical foundation and drive real traffic — organic and paid.
+            </p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              {[
+                'SEO audit — find every ranking gap',
+                'Technical SEO (meta, schema, speed)',
+                'Content strategy and keyword targeting',
+                'Google Ads and Meta Ads management',
+                'Website builds, SEO-ready from day one',
+              ].map(point => (
+                <div key={point} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
+                  <CheckCircle2 size={14} color="#C9A84C" style={{ marginTop: '3px', flexShrink: 0 }} />
+                  <span style={{
+                    fontFamily: '"DM Sans", system-ui, sans-serif',
+                    fontSize: '0.8rem',
+                    color: 'rgba(245,240,232,0.6)',
+                    lineHeight: 1.5,
+                  }}>
+                    {point}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        </motion.div>
+
+        {/* Why both — the positioning statement */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.6, ease: easing }}
+          style={{
+            borderLeft: '3px solid #C9A84C',
+            paddingLeft: '32px',
+            marginBottom: '80px',
+            maxWidth: '700px',
+          }}
+        >
+          <p style={{
+            fontFamily: '"Cormorant Garamond", Georgia, serif',
+            fontStyle: 'italic',
+            fontSize: '1.45rem',
+            fontWeight: 500,
+            color: '#F5F0E8',
+            lineHeight: 1.5,
+            margin: 0,
+          }}>
+            "Most businesses have the same two problems: things are chaotic on the inside, and nobody's finding them on the outside. I'm one person who can fix both — which means fewer vendors, faster results, and someone who understands the whole picture."
+          </p>
+        </motion.div>
+
+        {/* Services — Operations pillar */}
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-80px' }}
           variants={container}
-          style={{ marginBottom: '80px' }}
+          style={{ marginBottom: '56px' }}
         >
-          <div style={{
-            fontFamily: '"DM Sans", system-ui, sans-serif',
-            fontSize: '0.62rem',
-            fontWeight: 600,
-            letterSpacing: '0.2em',
-            textTransform: 'uppercase',
-            color: 'rgba(245,240,232,0.4)',
-            marginBottom: '24px',
-          }}>
-            What I Do
+          <div style={{ marginBottom: '20px' }}>
+            <div style={pillarHeadingStyle}>Pillar One</div>
+            <div style={{
+              fontFamily: '"Cormorant Garamond", Georgia, serif',
+              fontSize: '1.3rem',
+              fontWeight: 600,
+              color: '#F5F0E8',
+            }}>
+              Operations Consulting &amp; Automation
+            </div>
           </div>
 
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))',
-            gap: '12px',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(210px, 1fr))',
+            gap: '10px',
           }}>
-            {services.map(({ Icon, title, tags }) => (
+            {operationsServices.map(({ Icon, title, desc, tags }) => (
               <motion.div
                 key={title}
                 variants={item}
-                className="gold-glow-dark"
                 style={{
                   backgroundColor: 'rgba(255,255,255,0.04)',
                   border: '1px solid rgba(201,168,76,0.12)',
@@ -158,13 +384,14 @@ export default function ChapterWorkWithMe() {
                   padding: '20px',
                   display: 'flex',
                   flexDirection: 'column',
-                  gap: '10px',
+                  gap: '8px',
                   cursor: 'default',
+                  transition: 'border-color 0.25s ease, box-shadow 0.25s ease',
                 }}
                 onMouseEnter={e => {
                   const el = e.currentTarget as HTMLDivElement
                   el.style.borderColor = 'rgba(201,168,76,0.35)'
-                  el.style.boxShadow = '0 4px 32px rgba(201,168,76,0.12)'
+                  el.style.boxShadow = '0 4px 32px rgba(201,168,76,0.1)'
                 }}
                 onMouseLeave={e => {
                   const el = e.currentTarget as HTMLDivElement
@@ -172,21 +399,113 @@ export default function ChapterWorkWithMe() {
                   el.style.boxShadow = 'none'
                 }}
               >
-                <Icon size={18} color="#C9A84C" />
+                <Icon size={16} color="#C9A84C" />
                 <div style={{
                   fontFamily: '"Cormorant Garamond", Georgia, serif',
-                  fontSize: '1.1rem',
+                  fontSize: '1.05rem',
                   fontWeight: 600,
                   color: '#F5F0E8',
                   lineHeight: 1.2,
                 }}>
                   {title}
                 </div>
+                <p style={{
+                  fontFamily: '"Lora", Georgia, serif',
+                  fontSize: '0.78rem',
+                  color: 'rgba(245,240,232,0.5)',
+                  lineHeight: 1.6,
+                  margin: 0,
+                }}>
+                  {desc}
+                </p>
                 <div style={{
                   fontFamily: '"DM Sans", system-ui, sans-serif',
-                  fontSize: '0.7rem',
-                  color: 'rgba(245,240,232,0.55)',
-                  lineHeight: 1.5,
+                  fontSize: '0.68rem',
+                  color: 'rgba(201,168,76,0.6)',
+                  marginTop: '4px',
+                }}>
+                  {tags}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Services — SEO & Marketing pillar */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-80px' }}
+          variants={container}
+          style={{ marginBottom: '80px' }}
+        >
+          <div style={{ marginBottom: '20px' }}>
+            <div style={pillarHeadingStyle}>Pillar Two</div>
+            <div style={{
+              fontFamily: '"Cormorant Garamond", Georgia, serif',
+              fontSize: '1.3rem',
+              fontWeight: 600,
+              color: '#F5F0E8',
+            }}>
+              SEO &amp; Digital Marketing
+            </div>
+          </div>
+
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(210px, 1fr))',
+            gap: '10px',
+          }}>
+            {marketingServices.map(({ Icon, title, desc, tags }) => (
+              <motion.div
+                key={title}
+                variants={item}
+                style={{
+                  backgroundColor: 'rgba(201,168,76,0.04)',
+                  border: '1px solid rgba(201,168,76,0.14)',
+                  borderRadius: '4px',
+                  padding: '20px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '8px',
+                  cursor: 'default',
+                  transition: 'border-color 0.25s ease, box-shadow 0.25s ease',
+                }}
+                onMouseEnter={e => {
+                  const el = e.currentTarget as HTMLDivElement
+                  el.style.borderColor = 'rgba(201,168,76,0.4)'
+                  el.style.boxShadow = '0 4px 32px rgba(201,168,76,0.12)'
+                }}
+                onMouseLeave={e => {
+                  const el = e.currentTarget as HTMLDivElement
+                  el.style.borderColor = 'rgba(201,168,76,0.14)'
+                  el.style.boxShadow = 'none'
+                }}
+              >
+                <Icon size={16} color="#C9A84C" />
+                <div style={{
+                  fontFamily: '"Cormorant Garamond", Georgia, serif',
+                  fontSize: '1.05rem',
+                  fontWeight: 600,
+                  color: '#F5F0E8',
+                  lineHeight: 1.2,
+                }}>
+                  {title}
+                </div>
+                <p style={{
+                  fontFamily: '"Lora", Georgia, serif',
+                  fontSize: '0.78rem',
+                  color: 'rgba(245,240,232,0.5)',
+                  lineHeight: 1.6,
+                  margin: 0,
+                }}>
+                  {desc}
+                </p>
+                <div style={{
+                  fontFamily: '"DM Sans", system-ui, sans-serif',
+                  fontSize: '0.68rem',
+                  color: 'rgba(201,168,76,0.6)',
+                  marginTop: '4px',
                 }}>
                   {tags}
                 </div>
@@ -279,7 +598,7 @@ export default function ChapterWorkWithMe() {
           </div>
         </motion.div>
 
-        {/* Contact section — two column: info + form */}
+        {/* Contact section */}
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -303,7 +622,7 @@ export default function ChapterWorkWithMe() {
               color: 'rgba(245,240,232,0.4)',
               marginBottom: '24px',
             }}>
-              Get In Touch
+              Start the Conversation
             </div>
 
             <p style={{
@@ -313,7 +632,7 @@ export default function ChapterWorkWithMe() {
               lineHeight: 1.7,
               marginBottom: '28px',
             }}>
-              Have a project in mind? Drop me a line — I respond within 24 hours.
+              Whether you need an operations audit, an SEO fix, or both — reach out and I'll respond within 24 hours. No long sales process. Just a real conversation about your business.
             </p>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
@@ -376,18 +695,14 @@ export default function ChapterWorkWithMe() {
               </div>
             ) : (
               <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-                {/* Web3Forms hidden fields */}
                 <input type="hidden" name="access_key" value="61182368-6cdc-4631-9ac8-be2a5293d520" />
-                <input type="hidden" name="subject" value="New message from portfolio" />
+                <input type="hidden" name="subject" value="New inquiry from portfolio — Work With Me" />
                 <input type="checkbox" name="botcheck" style={{ display: 'none' }} />
 
                 <div>
                   <label htmlFor="name" style={labelStyle}>Name</label>
                   <input
-                    id="name"
-                    name="name"
-                    type="text"
-                    required
+                    id="name" name="name" type="text" required
                     placeholder="Your name"
                     value={formData.name}
                     onChange={e => setFormData(p => ({ ...p, name: e.target.value }))}
@@ -400,10 +715,7 @@ export default function ChapterWorkWithMe() {
                 <div>
                   <label htmlFor="email" style={labelStyle}>Email</label>
                   <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    required
+                    id="email" name="email" type="email" required
                     placeholder="your@email.com"
                     value={formData.email}
                     onChange={e => setFormData(p => ({ ...p, email: e.target.value }))}
@@ -414,13 +726,10 @@ export default function ChapterWorkWithMe() {
                 </div>
 
                 <div>
-                  <label htmlFor="message" style={labelStyle}>Message</label>
+                  <label htmlFor="message" style={labelStyle}>What are you working on?</label>
                   <textarea
-                    id="message"
-                    name="message"
-                    required
-                    rows={6}
-                    placeholder="Tell me what you're working on..."
+                    id="message" name="message" required rows={6}
+                    placeholder="Tell me about your business and what you're trying to solve — operations, SEO, ads, or all of it..."
                     value={formData.message}
                     onChange={e => setFormData(p => ({ ...p, message: e.target.value }))}
                     style={{ ...inputStyle, resize: 'vertical' }}
@@ -457,14 +766,12 @@ export default function ChapterWorkWithMe() {
                     alignSelf: 'flex-start',
                   }}
                   onMouseEnter={e => {
-                    if (formStatus !== 'sending') {
+                    if (formStatus !== 'sending')
                       (e.currentTarget as HTMLButtonElement).style.backgroundColor = '#A88A2E'
-                    }
                   }}
                   onMouseLeave={e => {
-                    if (formStatus !== 'sending') {
+                    if (formStatus !== 'sending')
                       (e.currentTarget as HTMLButtonElement).style.backgroundColor = '#C9A84C'
-                    }
                   }}
                 >
                   {formStatus === 'sending' ? 'Sending...' : 'Send Message'}
