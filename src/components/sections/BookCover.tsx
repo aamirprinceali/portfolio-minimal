@@ -230,23 +230,6 @@ export default function BookCover({ onOpen }: BookCoverProps) {
           )}
         </div>
 
-        {/* Tagline */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 2.4, duration: 0.8 }}
-          style={{
-            fontFamily: '"Lora", Georgia, serif',
-            fontStyle: 'italic',
-            fontSize: 'clamp(0.75rem, 1.5vw, 0.9rem)',
-            color: 'rgba(201,168,76,0.4)',
-            letterSpacing: '0.06em',
-            marginTop: '32px',
-          }}
-        >
-          Every chapter, earned.
-        </motion.p>
-
         {/* Scroll/click prompt */}
         <motion.div
           initial={{ opacity: 0 }} animate={{ opacity: 1 }}
