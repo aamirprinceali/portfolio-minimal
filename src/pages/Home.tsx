@@ -1,5 +1,3 @@
-import { useState } from 'react'
-import BookCover from '../components/sections/BookCover'
 import ChapterNav from '../components/sections/ChapterNav'
 import ChapterBackground from '../components/sections/ChapterBackground'
 import ChapterToolkit from '../components/sections/ChapterToolkit'
@@ -9,12 +7,11 @@ import ChapterWorkWithMe from '../components/sections/ChapterWorkWithMe'
 import ChapterProgress from '../components/layout/ChapterProgress'
 
 export default function Home() {
-  const [bookOpen, setBookOpen] = useState(false)
+  // Book cover intro removed 2026-08-29: content renders immediately (professional, no novelty gate)
+  const bookOpen = true
 
   return (
     <div style={{ backgroundColor: '#FDFCF8' }}>
-      <BookCover onOpen={() => setBookOpen(true)} />
-
       <ChapterProgress visible={bookOpen} />
 
       <div

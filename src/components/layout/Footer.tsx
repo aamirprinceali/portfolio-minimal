@@ -1,11 +1,13 @@
 export default function Footer() {
   const year = new Date().getFullYear()
   const links = [
-    { href: '/#about', label: 'About' },
-    { href: '/#tools', label: 'AI & Automation' },
-    { href: '/#projects', label: 'Projects' },
-    { href: '/work-with-me', label: 'Work With Me' },
-    { href: '/cv', label: 'CV' },
+    { href: '#chapter-background', label: 'Background' },
+    { href: '#chapter-toolkit', label: 'The Stack' },
+    { href: '#chapter-work', label: 'Portfolio' },
+    { href: '#chapter-work-with-me', label: 'Work With Me' },
+    { href: '#chapter-record', label: 'CV' },
+    { href: 'https://brickbybrickco.vercel.app', label: 'Brick by Brick' },
+    { href: 'https://www.linkedin.com/in/aamirnali/', label: 'LinkedIn' },
   ]
 
   return (

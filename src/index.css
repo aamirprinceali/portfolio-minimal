@@ -131,7 +131,7 @@ body::after {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  animation: gold-shimmer 5s linear infinite;
+  animation: none;
 }
 
 /* Timeline vertical line — gold light travels down it */
@@ -150,7 +150,7 @@ body::after {
     rgba(201,168,76,0.35) 100%
   );
   background-size: 100% 300%;
-  animation: timeline-shimmer 2.8s ease-in-out infinite;
+  animation: none;
 }
 
 /* Timeline dot — soft gold pulse ring */

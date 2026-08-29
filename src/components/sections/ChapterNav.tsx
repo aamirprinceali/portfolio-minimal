@@ -57,7 +57,7 @@ export default function ChapterNav() {
                 marginBottom: '32px',
               }}
             >
-              Profile Edition · 2026
+              Operations · AI · Plano, TX
             </motion.div>
 
             {/* Name — foil shimmer on hover */}
