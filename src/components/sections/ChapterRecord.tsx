@@ -23,19 +23,38 @@ const timeline = [
     location: 'Remote',
   },
   {
-    dates: 'Oct 2025 – Present',
+    dates: 'Oct 2025 – May 2026',
     role: 'Enrollment Operations Manager',
     company: 'HelloHero',
     location: 'Remote',
+  },
+  {
+    dates: 'May 2026 – Present',
+    role: 'Client Onboarding Analyst',
+    company: 'Covered Care',
+    location: 'Dallas, TX',
   },
 ]
 
 const experience = [
   {
+    title: 'Client Onboarding Analyst',
+    company: 'Covered Care',
+    location: 'Dallas, TX',
+    dates: 'May 2026 – Present',
+    bullets: [
+      'Authored and finalized the department’s SOP library from the ground up — an 11-category, ~20-document set covering merchant onboarding, application lifecycle, and compliance and KPI reporting — establishing it as the team’s single source of truth.',
+      'Defined the onboarding funnel’s KPI methodology from scratch (what counts as a submitted application, deduplication logic, turnaround-time measurement), then built the reporting pipeline around it — surfacing a major activation-rate gap between channels that got flagged directly to leadership.',
+      'Designed and built an internal reporting dashboard and operations platform — task management, KPI tracking, an SOP library, and activation tracking — using AI-assisted development; deployed and used daily by the team, and demoed directly to the CEO.',
+      'Built an AI-powered tool that automates a previously manual merchant risk-review write-up by pulling from multiple independent data sources, cutting a slow, repetitive task down to minutes.',
+      'Serve as the connective tissue between Sales, Compliance, Product, and leadership — training teammates on new tools and process, and owning the department’s process-improvement roadmap.',
+    ],
+  },
+  {
     title: 'Enrollment Operations Manager',
     company: 'HelloHero',
     location: 'Remote',
-    dates: 'Oct 2025 – Present',
+    dates: 'Oct 2025 – May 2026',
     bullets: [
       'Built and scaled the enrollment operations function from the ground up — designing SOPs, workflows, and team structures to support rapid growth across multiple school districts.',
       'Led a team of enrollment specialists, managing daily operations, performance tracking, and onboarding new hires into a structured, repeatable process.',
@@ -96,15 +115,19 @@ const experience = [
 const skillGroups = [
   {
     label: 'Core Skills',
-    skills: ['Operations Management', 'Team Leadership', 'SOP Design', 'Process Optimization', 'Stakeholder Relations', 'KPI Tracking', 'Multi-Channel Outreach', 'Data Analysis', 'Training & Onboarding', 'Change Management', 'Case Management', 'Customer Success'],
+    skills: ['Operations Management', 'Team Leadership', 'SOP Design', 'Process Optimization', 'Stakeholder Relations', 'KPI Tracking', 'Multi-Channel Outreach', 'Data Analysis', 'Training & Onboarding', 'Change Management', 'Case Management', 'Customer Success', 'Merchant & Vendor Onboarding', 'Compliance Coordination'],
   },
   {
     label: 'AI & Automation',
-    skills: ['ChatGPT', 'Claude', 'Gemini', 'n8n', 'Blotato', 'Gamma', 'Canva'],
+    skills: ['Claude Code', 'ChatGPT', 'Claude', 'Gemini', 'n8n', 'Blotato', 'Gamma', 'Canva'],
   },
   {
     label: 'CRM & Ops Tools',
-    skills: ['Salesforce', 'Zoho', 'HubSpot', 'Airtable', 'Notion', 'ConnectTeam', 'InSync (EHR)'],
+    skills: ['Salesforce', 'Zoho', 'HubSpot', 'Airtable', 'Notion', 'ConnectTeam', 'InSync (EHR)', 'Zendesk', 'GIACT', 'CLEAR (Compliance)'],
+  },
+  {
+    label: 'Product & Dev Tools',
+    skills: ['Supabase', 'Vercel', 'GitHub'],
   },
   {
     label: 'Tools & Communication',
@@ -112,7 +135,7 @@ const skillGroups = [
   },
   {
     label: 'Domains',
-    skills: ['Behavioral Health', 'Addiction Recovery', 'Pediatric Healthcare', 'Sober Living Ops', 'HIPAA Compliance'],
+    skills: ['Behavioral Health', 'Addiction Recovery', 'Pediatric Healthcare', 'Healthcare Fintech', 'Sober Living Ops', 'HIPAA Compliance'],
   },
 ]
 
@@ -167,7 +190,7 @@ export default function ChapterRecord() {
             marginBottom: '72px',
           }}
         >
-          Operations & Customer Success Professional with 5+ years across behavioral health, pediatric healthcare, and enrollment. I build teams, design systems, and use AI to make operations faster and smarter. From managing a sober living facility to leading enrollment operations at a venture-backed health tech startup — I've done the work at every level.
+          Operations & Onboarding Analyst with 5+ years across behavioral health, pediatric healthcare, enrollment, and healthcare fintech. I build teams, design systems, and use AI to make operations faster and smarter. From managing a sober living facility to leading enrollment operations at a venture-backed health tech startup to building the reporting, SOP, and AI-automation stack for a fintech onboarding department — I've done the work at every level.
         </motion.p>
 
         {/* Career timeline */}

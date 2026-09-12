@@ -6,22 +6,22 @@ import { HeartHandshake, Settings2, Bot, BarChart3 } from 'lucide-react'
 
 const bioText = [
   "I've always been drawn to work that combines people, problem-solving, and impact. I started in recovery services, managing a sober living home and helping residents navigate major life transitions. That experience gave me a strong foundation in leadership, empathy, and accountability — qualities that still shape how I work today.",
-  "Since then, I've grown into operations, enrollment, and customer-facing leadership roles where I've worked closely with individuals, families, and cross-functional teams to improve experiences and drive better outcomes. I'm at my best where service and systems overlap — improving workflows, solving bottlenecks, and making complex processes feel simpler and more human.",
+  "Since then, I've grown into operations, enrollment, and onboarding leadership roles — including building the onboarding operations function at a healthcare fintech startup — where I've worked closely with individuals, families, and cross-functional teams to improve experiences and drive better outcomes. I'm at my best where service and systems overlap — improving workflows, solving bottlenecks, and making complex processes feel simpler and more human.",
   "I'm also deeply interested in AI and automation, and I've spent the past few years exploring ways to use modern tools to work more efficiently, reduce friction, and build smarter systems. I enjoy learning quickly, experimenting with new technology, and finding practical ways to make work better.",
   "Outside of work, I enjoy spending time with my dog Casper, lifting weights, and working on personal projects that challenge me to keep learning and building.",
 ]
 
 const skills = [
-  'Healthcare Operations', 'Behavioral Health', 'Addiction Recovery',
-  'Enrollment Management', 'Team Leadership', 'Process & SOP Design',
+  'Healthcare Operations', 'Healthcare Fintech', 'Behavioral Health', 'Addiction Recovery',
+  'Enrollment Management', 'Merchant Onboarding', 'Team Leadership', 'Process & SOP Design',
   'AI & Automation', 'Customer Success', 'Content Creation', 'Website Building',
 ]
 
 const highlights = [
-  { Icon: HeartHandshake, title: 'Healthcare & Recovery Background', desc: '5+ years working across behavioral health, sober living, and enrollment ops — from frontline case management to leading teams.' },
-  { Icon: Settings2, title: 'Systems & Process Builder', desc: 'I build SOPs, workflows, and operational frameworks at fast-growing startups where nothing exists yet and everything needs to scale.' },
-  { Icon: Bot, title: 'AI as a Force Multiplier', desc: 'I use AI tools daily to eliminate busywork, automate repetitive tasks, and make operational decisions faster and smarter.' },
-  { Icon: BarChart3, title: 'Custom Tools & Dashboards', desc: 'I build custom dashboards, internal tools, and automations that give teams real visibility into their operations.' },
+  { Icon: HeartHandshake, title: 'Healthcare & Recovery Background', desc: '5+ years working across behavioral health, sober living, enrollment, and healthcare fintech — from frontline case management to leading onboarding operations.' },
+  { Icon: Settings2, title: 'Systems & Process Builder', desc: 'I build SOPs, workflows, and operational frameworks at fast-growing startups — including a full SOP library and KPI methodology for a fintech onboarding department — where nothing exists yet and everything needs to scale.' },
+  { Icon: Bot, title: 'AI as a Force Multiplier', desc: 'I use AI tools daily to eliminate busywork, automate repetitive tasks, and make operational decisions faster and smarter — including an AI agent that automates a manual review process at my current job.' },
+  { Icon: BarChart3, title: 'Custom Tools & Dashboards', desc: 'I build custom dashboards, internal tools, and automations that give teams real visibility into their operations — deployed and used daily by a live production team.' },
 ]
 
 const easing: [number, number, number, number] = [0.22, 1, 0.36, 1]
