@@ -3,7 +3,7 @@
 ## 🧭 REDESIGN INPUTS — read before the redesign (added 2026-10-17)
 - **Competitor/portfolio research:** `.ai/project/COMPETITOR_RESEARCH_2026-10-17.md` — apply Part 4: one plain sentence under the name · one primary button · a number on every project · numbered experience timeline · 3 repeatable case-study cards (problem / what I did / result / tools) · "Hiring me" vs "Working with me" (→ Brick by Brick) routing · one testimonial before contact · visible email + LinkedIn. Text-first; don't force images.
 - **Stock photos:** `~/Desktop/Website Photos/Portfolio/` (8 warm editorial desk/people shots, Unsplash free license, credits in `~/Desktop/Website Photos/PHOTO-CREDITS.md`). Use as accents only.
-- **Booking link (if needed):** https://calendly.com/aamirali1211/free-business-audit-call
+- **Booking link (if needed, Google Calendar):** https://calendar.google.com/calendar/appointments/schedules/AcZssZ2_cAqBz1X8swu4P4EDKS5rFfR-RtTByScJiaGaE6utGysncTxUpZbB_pfW-azdpyjW1sSCg17D
 
 Last session: 2026-04-24
 
