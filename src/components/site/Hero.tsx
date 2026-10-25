@@ -61,7 +61,7 @@ export default function Hero() {
               transition={{ duration: 0.9, delay: 0.7, ease: easeOut }}
             >
               <p className="mt-8 max-w-[30ch] font-body text-[clamp(1.375rem,2.4vw,1.875rem)] leading-[1.35] text-cream">
-                I run onboarding operations by day, and I build the dashboards, AI agents, and automations that take
+                I run onboarding operations by day, and I build the reporting, data tools, and AI agents that take
                 the busywork out of it.
               </p>
               <p className="mt-5 font-sans text-[0.9375rem] text-cream-dim">

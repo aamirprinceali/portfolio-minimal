@@ -27,6 +27,36 @@ function Story({ study, compact = false }: { study: CaseStudy; compact?: boolean
   )
 }
 
+// Browser-style frame around a real screenshot, with an optional caption
+// (used to say when the data shown is a fictional sample).
+function Shot({ image, eager = false }: { image: NonNullable<CaseStudy['image']>; eager?: boolean }) {
+  return (
+    <figure>
+      <div className="shot">
+        <div aria-hidden className="flex h-7 items-center gap-1.5 bg-[#1b1b1d] px-3">
+          <span className="h-2.5 w-2.5 rounded-full bg-cream/15" />
+          <span className="h-2.5 w-2.5 rounded-full bg-cream/15" />
+          <span className="h-2.5 w-2.5 rounded-full bg-cream/15" />
+        </div>
+        <div className="overflow-hidden">
+          <img
+            src={image.src}
+            alt={image.alt}
+            width={image.width}
+            height={image.height}
+            loading={eager ? 'eager' : 'lazy'}
+            decoding="async"
+            className="block h-auto w-full"
+          />
+        </div>
+      </div>
+      {image.caption && (
+        <figcaption className="mt-3 font-sans text-[0.75rem] text-muted">{image.caption}</figcaption>
+      )}
+    </figure>
+  )
+}
+
 function StudyLink({ link }: { link?: CaseStudy['link'] }) {
   if (!link) return null
   return (
@@ -57,26 +87,7 @@ export default function Work() {
           {featured.map((study, i) => (
             <article key={study.title} className="group grid items-center gap-10 md:grid-cols-12 md:gap-12">
               <Reveal className={`md:col-span-7 ${i % 2 ? 'md:order-2' : ''}`}>
-                {study.image && (
-                  <figure className="shot">
-                    <div aria-hidden className="flex h-7 items-center gap-1.5 bg-[#1b1b1d] px-3">
-                      <span className="h-2.5 w-2.5 rounded-full bg-cream/15" />
-                      <span className="h-2.5 w-2.5 rounded-full bg-cream/15" />
-                      <span className="h-2.5 w-2.5 rounded-full bg-cream/15" />
-                    </div>
-                    <div className="overflow-hidden">
-                      <img
-                        src={study.image.src}
-                        alt={study.image.alt}
-                        width={1400}
-                        height={875}
-                        loading="lazy"
-                        decoding="async"
-                        className="block h-auto w-full"
-                      />
-                    </div>
-                  </figure>
-                )}
+                {study.image && <Shot image={study.image} />}
               </Reveal>
               <Reveal delay={0.08} className={`md:col-span-5 ${i % 2 ? 'md:order-1' : ''}`}>
                 <p className="flex items-center gap-3 font-sans text-[0.8125rem] text-muted">
@@ -103,16 +114,21 @@ export default function Work() {
         {/* More work: three text-led case studies in columns */}
         <div className="mt-28 md:mt-36">
           <h3 className="font-display text-3xl font-semibold text-ink md:text-4xl">More from the notebook</h3>
-          <div className="mt-8 grid border-t border-ink md:grid-cols-3">
+          <div className="mt-8 grid border-t border-ink md:grid-cols-2">
             {moreWork.map((study, i) => (
               <Reveal
                 as="article"
                 key={study.title}
                 delay={i * 0.06}
                 className={`flex flex-col border-b border-rule py-8 md:border-b-0 md:py-10 ${
-                  i > 0 ? 'md:border-l md:pl-8' : ''
-                } ${i < 2 ? 'md:pr-8' : ''}`}
+                  i > 0 ? 'md:border-l md:pl-8' : 'md:pr-8'
+                }`}
               >
+                {study.image && (
+                  <div className="mb-7">
+                    <Shot image={study.image} />
+                  </div>
+                )}
                 <p className="font-sans text-[0.8125rem] text-muted">{study.context}</p>
                 <h4 className="mt-2 font-display text-[1.75rem] font-semibold leading-[1.08] text-ink">{study.title}</h4>
                 <Story study={study} compact />

@@ -21,7 +21,7 @@ export const links = {
 // Page sections, in order. Used by the nav and the hero's table of contents.
 export const sections = [
   { id: 'about', label: 'About', blurb: 'From a sober living house to fintech onboarding' },
-  { id: 'work', label: 'Work', blurb: 'Six builds: the problem, the fix, the result' },
+  { id: 'work', label: 'Work', blurb: 'Eight builds: the problem, the fix, the result' },
   { id: 'agents', label: 'Agents', blurb: 'The AI agents and automations I run' },
   { id: 'record', label: 'Experience', blurb: 'Roles, skills, and the résumé' },
   { id: 'practice', label: 'Brick by Brick', blurb: 'My consulting practice' },
@@ -31,8 +31,9 @@ export const sections = [
 // ── About ────────────────────────────────────────────────────────────────────
 export const bio = [
   "I started in recovery services, managing a sober living home and helping residents through some of the hardest transitions of their lives. That work taught me the job underneath every job: listen first, follow through, and don't let a person fall through a crack in the process.",
-  'Since then I have worked in admissions, enrollment, and onboarding across behavioral health, health tech, and now healthcare fintech. At Covered Care I run merchant onboarding end to end, built the department’s reporting, SOP library, and quality controls, and lead two analysts.',
-  "The thread through all of it: I'm at my best where service and systems overlap. When a process keeps breaking, I map it, fix it, write it down, and then build the tool that keeps it fixed. More and more, that tool is an AI agent I build myself.",
+  'Since then I have worked in admissions, enrollment, and onboarding across behavioral health, health tech, and now healthcare fintech. At Covered Care I run merchant onboarding end to end and lead two analysts. I built the department’s reporting framework and KPI dashboard, and I run SQL queries in Azure and Microsoft SQL Server to pull and analyze the data behind it.',
+  'I also build custom AI-assisted tools for our compliance team, like an agent that reviews a merchant’s website, reviews, complaints, and pricing before approval. I use AI in my own work every day, and I have led the push to bring it into how our teams work, helping the product and compliance teams use it for data analysis, SOP writing, finding gaps, and tightening workflows.',
+  "The thread through all of it: I'm at my best where service and systems overlap. When a process keeps breaking, I map it, fix it, write it down, and then build the tool that keeps it fixed. It is the same work I now do for small businesses through my practice, Brick by Brick.",
   'Off the clock, I lift, build side projects, and spend time with my dog Casper.',
 ]
 
@@ -55,11 +56,50 @@ export interface CaseStudy {
   built: string
   result: string
   tags: string[]
-  image?: { src: string; alt: string }
+  // caption: shown under the screenshot (used to flag sample data)
+  image?: { src: string; alt: string; width: number; height: number; caption?: string }
   link?: { href: string; label: string }
 }
 
+// Ordered by how much each one does. Employer tools are shown with fictional
+// sample data only: no real merchants, people, figures, or internal links.
 export const featured: CaseStudy[] = [
+  {
+    title: 'An AI agent that reviews merchants before approval',
+    context: 'AI tool · Built for the compliance team',
+    problem:
+      'Every new merchant needs an operational review before it can be approved: is the business real, what do customers say, and does the financing request make sense. Done by hand, that meant a pile of browser tabs per merchant and results that varied by reviewer.',
+    built:
+      "An agent that runs the whole check. It pulls customer reviews from Google, Yelp, and Trustpilot, checks CFPB complaints, captures every page of the business's website, cross-references the requested financing amount against actual and average procedure costs, and verifies the site's registration and domain age. Then it writes the report.",
+    result:
+      'Every finding comes with its evidence and source link, anything it could not verify is listed for a person to check, and the analyst always makes the final call. It drafts the review write-up too, so the analyst edits instead of starting from a blank page.',
+    tags: ['JavaScript', 'Supabase', 'Google Places API', 'Web scraping', 'AI-assisted'],
+    image: {
+      src: '/images/ops-review-agent.webp',
+      alt: 'Merchant review report for a fictional dental practice, with a suggested outcome, confidence level, section navigation, and an executive summary of website, review, pricing, and registration checks.',
+      width: 1600,
+      height: 1000,
+      caption: 'Shown with a fictional sample merchant.',
+    },
+  },
+  {
+    title: 'Onboarding reporting and a command center for the team',
+    context: 'Reporting system · Day job',
+    problem:
+      'Onboarding ran on scattered spreadsheets, chat threads, and tribal knowledge. Nobody could see the whole queue, and nobody could prove a number.',
+    built:
+      'A reporting system fed by our onboarding exports and SQL queries from Microsoft SQL Server in Azure. It shows KPIs, funnels, and time to activate by path, vertical, and source, with data-health checks that reconcile every number and a click-through to the exact merchants behind it. Around it: a work hub, activation tracking, the SOP library, and an operations agent that answers process questions from our own documentation.',
+    result:
+      'Used by the team every day. It is how we spot bottlenecks and keep onboarding turnaround down as application volume grows.',
+    tags: ['JavaScript', 'SQL Server', 'Azure', 'KPI reporting', 'AI agent'],
+    image: {
+      src: '/images/onboarding-reporting.webp',
+      alt: 'Onboarding reporting overview with KPI tiles for applications, pipeline, active merchants, locations, time to activate, holds, and losses, above a status mix chart.',
+      width: 1600,
+      height: 1000,
+      caption: 'Shown with fictional sample data. Branding removed.',
+    },
+  },
   {
     title: 'An AI receptionist, run from Fleet Command',
     context: 'Voice AI · Personal build',
@@ -71,25 +111,12 @@ export const featured: CaseStudy[] = [
       'Has taken live calls and booked consults on a real line. One core engine with a swappable skin per industry, so a new business is a new skin, not a rebuild.',
     tags: ['Vapi', 'Node.js', 'Voice AI', 'Dashboard'],
     image: {
-      src: '/images/fleet-command.jpg',
-      alt: 'Fleet Command dashboard showing an online receptionist, calls handled, consults booked, and recent call activity.',
+      src: '/images/fleet-command.webp',
+      alt: 'Fleet Command dashboard showing an online receptionist, calls handled, consults booked, alerts, and recent call activity.',
+      width: 1600,
+      height: 1000,
     },
     link: { href: 'https://brickbybrickops.com/services/ai-receptionist', label: 'How the receptionist works' },
-  },
-  {
-    title: 'A command center for my onboarding team',
-    context: 'Internal tool · Day job',
-    problem:
-      'Our client onboarding team ran on scattered spreadsheets, chat threads, and tribal knowledge. Nobody could see the whole queue or prove a number.',
-    built:
-      'One internal hub: a work queue, KPI reporting with data-health checks, the SOP library, activation tracking, and an operations agent that answers process questions from our own documentation.',
-    result:
-      'Used by the team every day. The reporting behind it is how we spot bottlenecks and keep onboarding turnaround down as application volume grows.',
-    tags: ['JavaScript', 'KPI reporting', 'SOPs', 'AI agent'],
-    image: {
-      src: '/images/onboarding-command-center.jpg',
-      alt: 'Onboarding command center with navigation for work hub, activations, KPI reporting, data health, and the SOP library.',
-    },
   },
   {
     title: 'Managr: operations for sober living homes',
@@ -99,33 +126,30 @@ export const featured: CaseStudy[] = [
     built:
       'One dashboard across every home: residents, chores, medications, drug tests, incidents, messaging, calendars, and reminders, with separate views for the owner and each house manager.',
     result:
-      'Shaped around how the facility actually runs. I managed one of these houses for three years, so I built the tool I wished I had.',
+      'Shaped around how the facility actually runs. I spent years inside these houses, so I built the tool I wished I had.',
     tags: ['Next.js', 'TypeScript', 'Supabase', 'Tailwind'],
     image: {
-      src: '/images/managr-dashboard.jpg',
-      alt: 'Managr dashboard summarizing residents, tasks, and alerts across multiple sober living homes.',
+      src: '/images/managr.webp',
+      alt: 'Managr dashboard with occupancy across four homes, flagged residents, overdue drug tests, and nightly report status.',
+      width: 1400,
+      height: 790,
+      caption: 'Shown with demo data.',
     },
-  },
-]
-
-export const moreWork: CaseStudy[] = [
-  {
-    title: 'Onboarding workflow and fraud audit map',
-    context: 'Process design · QA',
-    problem: 'No one could see the full onboarding workflow at once, including where the fraud and quality checks sat.',
-    built: 'An editable end-to-end map of the workflow with every fraud and QA checkpoint, one the team can actually maintain.',
-    result:
-      'Found a path where a failed verification step skipped compliance review entirely. The gap is closed, and the map is now the reference for training and audits.',
-    tags: ['Process mapping', 'QA', 'Compliance'],
   },
   {
     title: 'Mission Control',
     context: 'Personal operations hub',
     problem: 'I run several projects and AI coding sessions at once, and kept losing the thread between them.',
     built:
-      'One hub for every project: status, next step, and the agents and tools attached. A scanner reads my machine, and each AI session updates it when it wraps up.',
+      'One hub for every project: status, progress, next step, and the agents and tools attached. A scanner reads my machine, a live feed shows what each agent is doing, and every AI session updates it when it wraps up.',
     result: "No more 'where did I leave that' mornings. It maintains itself.",
-    tags: ['React', 'Vite', 'Zustand', 'Node.js'],
+    tags: ['React', 'Vite', 'Node.js', 'Agents'],
+    image: {
+      src: '/images/mission-control.webp',
+      alt: 'Mission Control home screen with a clock-style dial of live agents and sessions, a live agent feed, and a table of projects with progress and next steps.',
+      width: 1600,
+      height: 1000,
+    },
   },
   {
     title: 'brickbybrickops.com and its free tools',
@@ -135,17 +159,52 @@ export const moreWork: CaseStudy[] = [
       'My practice’s site, plus two free tools: a website agent that grades any homepage in about 20 seconds, and a revenue calculator that estimates what missed calls and slow replies cost.',
     result: 'Both are live and give a result without a sign-up.',
     tags: ['JavaScript', 'Vercel', 'AI agent', 'SEO'],
+    image: {
+      src: '/images/brickbybrick-tools.webp',
+      alt: 'Brick by Brick free tools page offering a website agent and a revenue calculator.',
+      width: 1600,
+      height: 1000,
+    },
     link: { href: 'https://brickbybrickops.com/tools', label: 'Try the free tools' },
   },
 ]
 
-export const earlierBuilds = [
+export const moreWork: CaseStudy[] = [
   {
     title: 'Prospect',
-    desc: 'A job search CRM with pipeline tracking and reporting on where applications stall.',
-    tags: 'React · TypeScript',
-    href: 'https://github.com/aamirprinceali/NextRound',
+    context: 'Web app · Job search CRM',
+    problem: 'A job search lives in a dozen places: postings, email, calendars, notes, and memory.',
+    built:
+      'One command center: a pipeline board, a daily focus list, follow-up reminders, interview prep, a weekly goal, and stats on where applications stall.',
+    result: 'Everything except hitting submit happens in one place.',
+    tags: ['React', 'TypeScript', 'Vite'],
+    image: {
+      src: '/images/prospect.webp',
+      alt: 'Prospect command center showing an active job hunt, applications sent, response rate, today’s follow-ups, and a pipeline summary.',
+      width: 1600,
+      height: 1000,
+      caption: 'Shown with fictional sample data.',
+    },
+    link: { href: 'https://github.com/aamirprinceali/NextRound', label: 'View the code' },
   },
+  {
+    title: 'My first portfolio',
+    context: 'Website · Design playground',
+    problem: 'I wanted a portfolio that showed I could build, not just describe.',
+    built:
+      'A hand-built space theme in plain HTML, CSS, and JavaScript: a constellation canvas, a terminal-style card, project pages, and a full CV.',
+    result: 'The playground where I learned the front-end basics this site is built on.',
+    tags: ['HTML', 'CSS', 'JavaScript'],
+    image: {
+      src: '/images/portfolio-space.webp',
+      alt: 'Dark space-themed portfolio hero with a constellation drawing, the name Aamir Ali, and a terminal-style info card.',
+      width: 1600,
+      height: 1000,
+    },
+  },
+]
+
+export const earlierBuilds = [
   {
     title: 'ScheduleHero',
     desc: 'A scheduling tool built to replace a team’s shared Google Sheets.',
@@ -181,13 +240,18 @@ export const agents: Agent[] = [
     status: 'Built',
   },
   {
-    name: 'Merchant review tools',
-    does: "Check a merchant's website and public reviews through connected APIs, and flag potential fraud indicators for a human reviewer.",
+    name: 'Operations review agent',
+    does: "Checks a merchant before approval: Google, Yelp, and Trustpilot reviews, CFPB complaints, every page of the website, the financing request against procedure costs, and domain age. Writes the report; a person makes the call.",
     status: 'In use',
   },
   {
     name: 'Operations agent',
-    does: "Answers a team's process questions straight from its own SOP library.",
+    does: "Answers a team's process questions straight from its own SOP library, inside the reporting dashboard.",
+    status: 'In use',
+  },
+  {
+    name: 'Mission Control scanner',
+    does: 'Reads my machine for projects, agents, and tools, and keeps a live feed of what every agent is doing.',
     status: 'In use',
   },
   {
@@ -212,7 +276,7 @@ export const agents: Agent[] = [
   },
 ]
 
-export const stack = ['Claude Code', 'ChatGPT', 'Gemini', 'n8n', 'Supabase', 'Vercel', 'Playwright', 'GitHub']
+export const stack = ['Claude Code', 'ChatGPT', 'Gemini', 'Copilot', 'n8n', 'Supabase', 'SQL Server', 'Vercel', 'Playwright', 'GitHub']
 
 // ── Experience (Résumé V6) ───────────────────────────────────────────────────
 export interface Role {
@@ -230,9 +294,11 @@ export const roles: Role[] = [
     dates: 'May 2026 to present',
     bullets: [
       'Run end-to-end merchant onboarding across direct and aggregator channels: application review, financial documentation, compliance, partner communication, and activation.',
-      'Built the department’s reporting framework and KPI dashboard, and use it to find bottlenecks and cut turnaround time as application volume grows.',
+      'Built the department’s reporting framework and KPI dashboard. Run SQL queries in Azure and Microsoft SQL Server to pull and analyze onboarding data, then use it to find bottlenecks and cut turnaround time as application volume grows.',
+      'Built custom AI-assisted tools for the compliance team, including a merchant review agent that checks websites, customer reviews, complaints, pricing, and domain age, and flags potential fraud indicators.',
+      'Use AI tools in my own workflow every day, and lead the push to bring them into our teams’ work: helping product and compliance use AI for data analysis, SOP creation, finding gaps, and improving workflows.',
       'Established the SOP library, standardized workflows, training resources, and quality controls. Lead two onboarding analysts.',
-      'Designed and built internal reporting, automation, and API-connected review tools with AI development platforms, covering merchant website checks, review analysis, and fraud indicators.',
+      'Partner with aggregators and the Compliance, Finance, Sales, Product, and Development teams to resolve issues, verify ACH documentation, and get merchants activated on time.',
     ],
   },
   {
@@ -266,15 +332,6 @@ export const roles: Role[] = [
       'Owned the pipeline from inquiry to admission with complete documentation and no follow-up gaps.',
     ],
   },
-  {
-    title: 'House Manager & Case Manager',
-    company: 'Lighthouse Recovery',
-    dates: '2020 to 2023',
-    bullets: [
-      'Ran daily operations of a sober living residence: accountability, house standards, testing, and resident support.',
-      'Connected residents leaving treatment with jobs, outpatient care, and community support.',
-    ],
-  },
 ]
 
 export const skillGroups = [
@@ -284,16 +341,22 @@ export const skillGroups = [
       'Client onboarding & lifecycle',
       'Operations process design & SOPs',
       'Team leadership',
-      'KPI reporting & analysis',
+      'KPI reporting & dashboards',
+      'Data analysis & SQL queries',
       'Quality assurance & compliance',
       'Merchant & aggregator onboarding',
       'AI-assisted tool development',
+      'Leading AI adoption on teams',
       'Workflow automation',
     ],
   },
+  {
+    label: 'Data & reporting',
+    items: ['Microsoft SQL Server', 'SQL queries', 'Azure', 'Reporting & BI', 'Data analysis', 'Excel'],
+  },
   { label: 'CRM & systems', items: ['Salesforce', 'HubSpot', 'Zoho', 'Airtable', 'Zendesk'] },
   { label: 'AI & automation', items: ['Claude Code', 'ChatGPT', 'Gemini', 'n8n', 'Perplexity', 'Copilot'] },
-  { label: 'Ops & build', items: ['Notion', 'Supabase', 'Vercel', 'Miro', 'ConnectTeam', 'SQL Server'] },
+  { label: 'Ops & build', items: ['Notion', 'Supabase', 'Vercel', 'Miro', 'ConnectTeam', 'SharePoint'] },
   { label: 'Communication', items: ['Aircall', 'CloudTalk', 'Heymarket', 'Slack', 'Zoom', 'Teams'] },
 ]
 
