@@ -6,20 +6,20 @@ import { Button, Reveal, SectionHead } from './primitives'
 // education, and certifications in a sidebar, plus the PDF download.
 export default function Experience() {
   return (
-    <section id="record" aria-labelledby="record-title" className="bg-paper py-24 md:py-32">
+    <section id="experience" aria-labelledby="experience-title" className="border-t border-rule bg-paper py-20 md:py-28">
       <div className="mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-10">
         <SectionHead
-          id="record"
-          title="The record"
-          deck="Five-plus years in client operations, promoted twice on performance. The same pattern in every role: take the messy process, make it repeatable."
+          id="experience"
+          title="Experience"
+          deck="Client operations across healthcare fintech, health tech, and behavioral health."
         />
 
         <div className="grid gap-16 lg:grid-cols-12 lg:gap-10">
           {/* Timeline */}
-          <ol className="relative lg:col-span-8">
+          <ol className="relative lg:col-span-8" aria-label="Roles">
             <span aria-hidden className="absolute bottom-2 left-[5px] top-2 w-px bg-rule md:left-[11.5rem]" />
             {roles.map((r, i) => (
-              <Reveal as="li" key={r.title + r.dates} className="relative grid gap-2 pb-12 pl-8 md:grid-cols-[11.5rem_1fr] md:gap-0 md:pl-0">
+              <Reveal as="li" key={r.title + r.dates} className="relative grid gap-2 pb-10 pl-8 md:grid-cols-[11.5rem_1fr] md:gap-0 md:pl-0">
                 {/* Dot on the line; the current role is filled gold */}
                 <span
                   aria-hidden
@@ -51,12 +51,10 @@ export default function Experience() {
 
           {/* Sidebar */}
           <aside className="space-y-12 lg:col-span-4" aria-label="Skills and education">
-            <Reveal className="rounded-[14px] bg-ink p-7 text-cream">
-              <p className="font-display text-2xl font-semibold">The one-page version</p>
-              <p className="mt-2 font-sans text-[0.875rem] leading-relaxed text-cream-dim">
-                Résumé V6, updated October 2026. PDF, 50 KB.
-              </p>
-              <Button href={links.resume} download className="mt-6 w-full">
+            <Reveal className="rounded-[12px] border border-rule bg-surface p-6">
+              <p className="font-display text-2xl font-semibold text-ink">Résumé</p>
+              <p className="mt-1 font-sans text-[0.875rem] text-muted">Updated October 2026 · PDF</p>
+              <Button href={links.resume} variant="ink" download className="mt-5 w-full">
                 <ArrowDownToLine size={17} aria-hidden />
                 Download résumé
               </Button>

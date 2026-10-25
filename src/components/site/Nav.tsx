@@ -94,11 +94,10 @@ export default function Nav() {
       {open && (
         <div id="mobile-menu" className="border-t border-cream/10 bg-ink px-4 pb-8 pt-2 sm:px-6 lg:hidden">
           <ul>
-            {sections.map(({ id, label, blurb }) => (
+            {sections.map(({ id, label }) => (
               <li key={id} className="border-b border-cream/10">
-                <a href={`#${id}`} onClick={() => setOpen(false)} className="flex flex-col py-4">
-                  <span className="font-display text-2xl font-semibold text-cream">{label}</span>
-                  <span className="font-sans text-sm text-cream-dim">{blurb}</span>
+                <a href={`#${id}`} onClick={() => setOpen(false)} className="block py-4 font-display text-2xl font-semibold text-cream">
+                  {label}
                 </a>
               </li>
             ))}
