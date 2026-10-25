@@ -65,13 +65,6 @@ html { scrollbar-color: #C9BFA9 var(--color-paper); }
 }
 .skip-link:focus-visible { top: 1rem; }
 
-/* Scroll progress bar */
-#scroll-progress {
-  position: fixed; top: 0; left: 0; height: 2px; z-index: 60;
-  background: var(--color-gold);
-  transform-origin: left;
-}
-
 /* Small caps label used inside content (not above headings) */
 .label {
   font-family: var(--font-sans);
@@ -92,7 +85,7 @@ html { scrollbar-color: #C9BFA9 var(--color-paper); }
 }
 .ink-link:hover, .ink-link:focus-visible { background-size: 100% 1px; }
 
-/* Dotted leader between a label and a value (ledger + table of contents) */
+/* Dotted leader between a label and a value (education list) */
 .leader {
   flex: 1;
   border-bottom: 1px dotted currentColor;
@@ -104,19 +97,18 @@ html { scrollbar-color: #C9BFA9 var(--color-paper); }
 /* Tabular figures wherever numbers line up */
 .tnum { font-variant-numeric: tabular-nums lining-nums; }
 
-/* Screenshot frame: browser-chrome strip above a real product screenshot */
+/* Screenshot frame: thin border and soft shadow around a real product screenshot */
 .shot {
-  border-radius: 12px;
+  border-radius: 10px;
   overflow: hidden;
   background: #0b0b0c;
-  box-shadow: 0 1px 2px rgba(15, 15, 14, 0.08), 0 24px 48px -16px rgba(15, 15, 14, 0.28);
+  border: 1px solid var(--color-rule);
+  box-shadow: 0 1px 2px rgba(15, 15, 14, 0.06), 0 16px 32px -20px rgba(15, 15, 14, 0.25);
 }
-.shot img { transition: transform 0.9s var(--ease-out-expo); }
-.group:hover .shot img { transform: scale(1.025); }
 
 /* Print: keep it readable if someone prints the page */
 @media print {
-  nav, #scroll-progress, .no-print { display: none !important; }
+  nav, .no-print { display: none !important; }
   body { background: #fff; }
 }
 

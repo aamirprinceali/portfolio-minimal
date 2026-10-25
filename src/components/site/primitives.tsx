@@ -5,8 +5,8 @@ import type { ReactNode } from 'react'
 export const easeOut: [number, number, number, number] = [0.16, 1, 0.3, 1]
 
 // ── Reveal ───────────────────────────────────────────────────────────────────
-// Content fades and rises a little as it scrolls into view. Starts nearly
-// visible so nothing feels hidden; reduced-motion users get no movement
+// Content fades in with a small rise as it scrolls into view. Kept short and
+// quiet on purpose; reduced-motion users get no movement
 // (handled globally by <MotionConfig reducedMotion="user">).
 export function Reveal({
   children,
@@ -23,10 +23,10 @@ export function Reveal({
   return (
     <Tag
       className={className}
-      initial={{ opacity: 0, y: 18 }}
+      initial={{ opacity: 0, y: 8 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '0px 0px -10% 0px' }}
-      transition={{ duration: 0.8, delay, ease: easeOut }}
+      viewport={{ once: true, margin: '0px 0px -8% 0px' }}
+      transition={{ duration: 0.5, delay, ease: easeOut }}
     >
       {children}
     </Tag>
@@ -34,8 +34,7 @@ export function Reveal({
 }
 
 // ── Section heading ──────────────────────────────────────────────────────────
-// A hairline rule that draws in, then a large serif headline and an optional
-// standfirst (the magazine "deck"). The heading carries itself: no eyebrow.
+// A plain hairline rule, a serif headline, and an optional one-line summary.
 export function SectionHead({
   id,
   title,
@@ -48,38 +47,22 @@ export function SectionHead({
   dark?: boolean
 }) {
   return (
-    <header className="mb-14 md:mb-20">
-      <motion.div
-        aria-hidden
-        className={`h-px origin-left ${dark ? 'bg-cream/20' : 'bg-ink/80'}`}
-        initial={{ scaleX: 0 }}
-        whileInView={{ scaleX: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 1.2, ease: easeOut }}
-      />
-      <div className="mt-8 grid gap-6 md:mt-10 md:grid-cols-12 md:gap-10">
-        <Reveal className="md:col-span-7">
-          <h2
-            id={`${id}-title`}
-            className={`font-display text-[clamp(2.75rem,6vw,5rem)] font-semibold leading-[0.95] tracking-[-0.02em] ${
-              dark ? 'text-cream' : 'text-ink'
-            }`}
-          >
-            {title}
-          </h2>
-        </Reveal>
+    <header className={`mb-12 border-t pt-8 md:mb-16 md:pt-10 ${dark ? 'border-cream/20' : 'border-ink/80'}`}>
+      <Reveal>
+        <h2
+          id={`${id}-title`}
+          className={`font-display text-[clamp(2.25rem,4.5vw,3.5rem)] font-semibold leading-[1] tracking-[-0.015em] ${
+            dark ? 'text-cream' : 'text-ink'
+          }`}
+        >
+          {title}
+        </h2>
         {deck && (
-          <Reveal delay={0.1} className="md:col-span-5 md:self-end">
-            <p
-              className={`max-w-[46ch] font-body text-lg italic leading-relaxed ${
-                dark ? 'text-cream-dim' : 'text-muted'
-              }`}
-            >
-              {deck}
-            </p>
-          </Reveal>
+          <p className={`mt-4 max-w-[58ch] font-body text-[1.0625rem] leading-relaxed ${dark ? 'text-cream-dim' : 'text-muted'}`}>
+            {deck}
+          </p>
         )}
-      </div>
+      </Reveal>
     </header>
   )
 }

@@ -37,19 +37,19 @@ export default function Contact() {
     'mt-2 w-full rounded-[10px] border border-cream/15 bg-cream/[0.04] px-4 py-3 font-body text-[1rem] text-cream placeholder:text-cream/45 transition-colors focus:border-gold focus:outline-none focus-visible:outline-none'
 
   return (
-    <section id="contact" aria-labelledby="contact-title" className="bg-ink py-24 text-cream md:py-32">
+    <section id="contact" aria-labelledby="contact-title" className="bg-ink py-20 text-cream md:py-28">
       <div className="mx-auto grid max-w-[1200px] gap-16 px-4 sm:px-6 md:grid-cols-12 md:gap-10 lg:px-10">
         <div className="md:col-span-6">
           <Reveal>
             <h2
               id="contact-title"
-              className="font-display text-[clamp(3rem,7vw,5.5rem)] font-semibold leading-[0.92] tracking-[-0.02em] text-cream"
+              className="font-display text-[clamp(2.75rem,6vw,4.5rem)] font-semibold leading-[0.95] tracking-[-0.02em] text-cream"
             >
               Let&rsquo;s talk.
             </h2>
-            <p className="mt-6 max-w-[40ch] font-body text-lg italic leading-relaxed text-cream-dim">
-              Hiring for operations, onboarding, or AI-minded ops roles? Building something and need a hand? Either way,
-              I reply within one business day.
+            <p className="mt-6 max-w-[42ch] font-body text-lg leading-relaxed text-cream-dim">
+              Open to operations, onboarding, and AI-focused operations roles, and to select consulting projects.
+              Replies within one business day.
             </p>
           </Reveal>
 

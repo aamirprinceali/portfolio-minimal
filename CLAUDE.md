@@ -1,7 +1,7 @@
 # portfolio-minimal — CLAUDE.md
 
-> **CURRENT STATE (2026-10-25 facelift, branch `facelift-2026-10-25`):** single-page React + Vite + Tailwind v4 site.
-> Sections live in `src/components/site/` (Nav, Hero, About, Work, Agents, Experience, Practice, Contact, Footer);
+> **CURRENT STATE (2026-10-25 round 3, branch `portfolio-round2`, PR #2):** single-page React + Vite + Tailwind v4 site. Order: Hero, About, Experience, Work (4 featured), Projects (compact list), Agents (compact list), Practice, Contact. Calm motion, no Lenis/progress bar.
+> Sections live in `src/components/site/` (Nav, Hero, About, Experience, Work, Projects, Agents, Practice, Contact, Footer);
 > ALL copy lives in `src/data/content.ts` (source of truth: Resume V6 Master + brickbybrickops.com public pages; no em dashes).
 > Résumé PDF: `public/Aamir-Ali-Resume.pdf`. Images: `public/images/`. Share image: `public/og-image.png`.
 > Same identity: paper/ink/gold, Cormorant Garamond + Lora + DM Sans. Run: `npm run dev` from `~/dev/portfolio-minimal`.
