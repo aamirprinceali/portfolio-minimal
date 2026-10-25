@@ -1,5 +1,12 @@
 # portfolio-minimal — CLAUDE.md
 
+> **CURRENT STATE (2026-10-25 facelift, branch `facelift-2026-10-25`):** single-page React + Vite + Tailwind v4 site.
+> Sections live in `src/components/site/` (Nav, Hero, About, Work, Agents, Experience, Practice, Contact, Footer);
+> ALL copy lives in `src/data/content.ts` (source of truth: Resume V6 Master + brickbybrickops.com public pages; no em dashes).
+> Résumé PDF: `public/Aamir-Ali-Resume.pdf`. Images: `public/images/`. Share image: `public/og-image.png`.
+> Same identity: paper/ink/gold, Cormorant Garamond + Lora + DM Sans. Run: `npm run dev` from `~/dev/portfolio-minimal`.
+> The older notes below (book cover, chapters, root cv.html/css/js) are history; root `cv.html`, `work-with-me.html`, `css/`, `js/` are legacy and not part of the Vite build.
+
 ## What This Project Is
 A second version of Aamir's personal portfolio — **same content, completely different design**.
 The space/constellation theme lives in `~/Desktop/dev/portfolio-site` (branch: space-final).
@@ -100,7 +107,7 @@ Remove these artifacts that are still present in the copied HTML:
 
 ## How to Run
 ```bash
-cd ~/Desktop/dev/portfolio-minimal
+cd ~/dev/portfolio-minimal
 npm run dev
 # Open http://localhost:5173 in browser
 # If port is taken, Vite picks the next one — check terminal for the exact URL
