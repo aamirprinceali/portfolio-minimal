@@ -1,164 +1,131 @@
 @import "tailwindcss";
 
+/* ─────────────────────────────────────────────────────────────────────────────
+   Design tokens. Editorial palette (paper, ink, one gold accent) and the
+   three-font system: Cormorant Garamond for display, Lora for reading,
+   DM Sans for small interface text.
+   ───────────────────────────────────────────────────────────────────────────── */
 @theme {
-  /* Fortune/Bloomberg editorial palette */
   --color-paper: #FDFCF8;
-  --color-ink: #0F0F0E;
-  --color-gold: #C9A84C;
-  --color-gold-dark: #A88A2E;
   --color-surface: #F5F2EA;
-  --color-border: #E2DCCF;
-  --color-muted: #7A7060;
-  --color-cover: #0F0F0E;
+  --color-rule: #E2DCCF;
+  --color-ink: #0F0F0E;
+  --color-ink-2: #1A1916;
+  --color-body: #3D3730;
+  --color-muted: #6E6556;      /* 5.3:1 on paper */
+  --color-gold: #C9A84C;       /* accent on dark surfaces only */
+  --color-gold-ink: #85681C;   /* gold for text on paper, 5.0:1 */
+  --color-cream: #F5F0E8;
+  --color-cream-dim: #B9B1A3;  /* secondary text on ink, 8:1 */
 
-  /* Compatibility aliases used by existing components */
-  --color-background: #FDFCF8;
-  --color-primary: #0F0F0E;
-  --color-secondary: #7A7060;
-  --color-accent: #C9A84C;
-  --color-accent-light: #A88A2E;
-
-  /* Fonts */
   --font-display: "Cormorant Garamond", Georgia, serif;
   --font-body: "Lora", Georgia, serif;
-  --font-sans: "DM Sans", system-ui, sans-serif;
+  --font-sans: "DM Sans", ui-sans-serif, sans-serif;
 
-  --max-width-container: 1100px;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
+/* ── Base ───────────────────────────────────────────────────────────────────── */
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  background-color: #FDFCF8;
-  color: #0F0F0E;
-  font-family: 'Lora', Georgia, serif;
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
 }
 
-/* Scroll progress bar — gold */
+h1, h2, h3 { text-wrap: balance; }
+p { text-wrap: pretty; }
+
+/* Browser surfaces carry the palette too */
+::selection { background: rgba(201, 168, 76, 0.32); color: var(--color-ink); }
+:focus { outline: none; }
+:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+html { scrollbar-color: #C9BFA9 var(--color-paper); }
+
+/* Skip link for keyboard users */
+.skip-link {
+  position: absolute; left: 1rem; top: -4rem; z-index: 100;
+  background: var(--color-gold); color: var(--color-ink);
+  font-family: var(--font-sans); font-weight: 600; font-size: 0.875rem;
+  padding: 0.6rem 1rem; border-radius: 4px;
+  transition: top 0.2s var(--ease-out-expo);
+}
+.skip-link:focus-visible { top: 1rem; }
+
+/* Scroll progress bar */
 #scroll-progress {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 2px;
-  background-color: #C9A84C;
-  z-index: 100;
-  transition: width 0.1s linear;
+  position: fixed; top: 0; left: 0; height: 2px; z-index: 60;
+  background: var(--color-gold);
+  transform-origin: left;
 }
 
-/* Chapter scroll snap container */
-.chapters-container {
-  height: 100vh;
-  overflow-y: scroll;
-  scroll-snap-type: y proximity;
-  scroll-behavior: smooth;
+/* Small caps label used inside content (not above headings) */
+.label {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
 }
 
-.chapter-section {
-  scroll-snap-align: start;
-  min-height: 100vh;
+/* Text link with an animated underline */
+.ink-link {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.35s var(--ease-out-expo), color 0.2s;
+  padding-bottom: 2px;
+}
+.ink-link:hover, .ink-link:focus-visible { background-size: 100% 1px; }
+
+/* Dotted leader between a label and a value (ledger + table of contents) */
+.leader {
+  flex: 1;
+  border-bottom: 1px dotted currentColor;
+  opacity: 0.35;
+  margin: 0 0.6rem 0.3rem;
+  min-width: 1.5rem;
 }
 
-/* Grain overlay */
-body::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 9998;
-  opacity: 0.018;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  background-size: 200px 200px;
-}
+/* Tabular figures wherever numbers line up */
+.tnum { font-variant-numeric: tabular-nums lining-nums; }
 
-/* Mobile responsive */
-@media (max-width: 768px) {
-  .hidden-mobile { display: none !important; }
-  .show-mobile { display: block !important; }
+/* Screenshot frame: browser-chrome strip above a real product screenshot */
+.shot {
+  border-radius: 12px;
+  overflow: hidden;
+  background: #0b0b0c;
+  box-shadow: 0 1px 2px rgba(15, 15, 14, 0.08), 0 24px 48px -16px rgba(15, 15, 14, 0.28);
 }
+.shot img { transition: transform 0.9s var(--ease-out-expo); }
+.group:hover .shot img { transform: scale(1.025); }
 
-/* Print styles for CV chapter */
+/* Print: keep it readable if someone prints the page */
 @media print {
-  .no-print { display: none !important; }
-  body::after { display: none; }
-  #scroll-progress { display: none; }
+  nav, #scroll-progress, .no-print { display: none !important; }
+  body { background: #fff; }
 }
 
-/* Gold glow on hover — light sections */
-.gold-glow {
-  transition: box-shadow 0.35s ease, border-color 0.35s ease, transform 0.2s ease !important;
-}
-.gold-glow:hover {
-  box-shadow: 0 0 0 1px rgba(201,168,76,0.18), 0 6px 28px rgba(201,168,76,0.1), 0 0 56px rgba(201,168,76,0.05) !important;
-  transform: translateY(-2px) !important;
-}
-
-/* Gold glow on hover — dark sections (more visible) */
-.gold-glow-dark {
-  transition: box-shadow 0.35s ease, border-color 0.35s ease, transform 0.2s ease !important;
-}
-.gold-glow-dark:hover {
-  box-shadow: 0 0 0 1px rgba(201,168,76,0.28), 0 6px 36px rgba(201,168,76,0.18), 0 0 72px rgba(201,168,76,0.09) !important;
-  transform: translateY(-2px) !important;
-}
-
-/* Gold foil shimmer — sweeps across the name on the book cover */
-@keyframes gold-shimmer {
-  0% { background-position: -200% center; }
-  100% { background-position: 200% center; }
-}
-
-.foil-shimmer {
-  background: linear-gradient(
-    90deg,
-    #C9A84C 15%,
-    #E8C96A 35%,
-    #FFF5C0 48%,
-    #FFF9E8 52%,
-    #E8C96A 65%,
-    #C9A84C 85%
-  );
-  background-size: 250% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: none;
-}
-
-/* Timeline vertical line — gold light travels down it */
-@keyframes timeline-shimmer {
-  0%   { background-position: 0 -50%; }
-  100% { background-position: 0 200%; }
-}
-
-.timeline-shimmer-line {
-  background: linear-gradient(
-    to bottom,
-    rgba(201,168,76,0.35) 0%,
-    rgba(201,168,76,0.35) 44%,
-    rgba(255,218,90,1) 50%,
-    rgba(201,168,76,0.35) 56%,
-    rgba(201,168,76,0.35) 100%
-  );
-  background-size: 100% 300%;
-  animation: none;
-}
-
-/* Timeline dot — soft gold pulse ring */
-@keyframes dot-ring {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(201,168,76,0), 0 0 0 2px rgba(201,168,76,0.2); }
-  50%       { box-shadow: 0 0 0 5px rgba(201,168,76,0.12), 0 0 0 2px rgba(201,168,76,0.35); }
-}
-
-.timeline-dot-pulse {
-  animation: dot-ring 2.8s ease-in-out infinite;
+/* Respect reduced motion everywhere */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

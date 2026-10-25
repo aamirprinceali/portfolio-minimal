@@ -1,5 +1,10 @@
 # Session Handoff — Portfolio Minimal
 
+## 2026-10-25 facelift (branch facelift-2026-10-25, PR open, not merged)
+- Rebuilt the page as one editorial scroll: cover hero (portrait, one-line pitch, "In this issue" contents) · About · Selected work (3 screenshot case studies + 3 text case studies + open-source list) · Agents & automations · The record (Résumé V6 timeline + skills) · Brick by Brick · Contact (Web3Forms form kept).
+- Copy in `src/data/content.ts`; old chapter components deleted. Résumé PDF downloadable. New OG image.
+- Next: coordinator reviews the Vercel preview, merges to main to deploy. Aamir to confirm: keep House Manager (2020-2023) on timeline (not on Résumé V6); OK to show Covered Care command center screenshot (already public on brickbybrickops.com).
+
 ## 🧭 REDESIGN INPUTS — read before the redesign (added 2026-10-17)
 - **Competitor/portfolio research:** `.ai/project/COMPETITOR_RESEARCH_2026-10-17.md` — apply Part 4: one plain sentence under the name · one primary button · a number on every project · numbered experience timeline · 3 repeatable case-study cards (problem / what I did / result / tools) · "Hiring me" vs "Working with me" (→ Brick by Brick) routing · one testimonial before contact · visible email + LinkedIn. Text-first; don't force images.
 - **Stock photos:** `~/Desktop/Website Photos/Portfolio/` (8 warm editorial desk/people shots, Unsplash free license, credits in `~/Desktop/Website Photos/PHOTO-CREDITS.md`). Use as accents only.
